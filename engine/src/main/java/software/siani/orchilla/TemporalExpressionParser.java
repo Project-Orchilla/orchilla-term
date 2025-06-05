@@ -55,6 +55,7 @@ public class TemporalExpressionParser {
     }
 
     private TemporalTag context(String context) {
+        if (context.equalsIgnoreCase("???")) return null;
         if (isInterval(context)) return intervalFor(context);
         return temporalTagFrom(context);
     }
