@@ -2,12 +2,13 @@ package software.siani.orchilla;
 
 import software.siani.orchilla.operators.CompositeTemporalOperator;
 import software.siani.orchilla.operators.TemporalOperator;
+import systems.intino.datamarts.subjectstore.SubjectStore;
 
 import java.util.List;
 import java.util.Objects;
 
 public class TemporalExpression {
-    private final TemporalTag context;
+    private TemporalTag context;
     private final CompositeTemporalOperator operator;
 
     public TemporalExpression(TemporalTag context, CompositeTemporalOperator operator) {
@@ -15,12 +16,19 @@ public class TemporalExpression {
         this.operator = operator;
     }
 
-    public TemporalTag context() {
-        return context;
+    public TemporalTag solve() {
+        if (context == null)
+            throw new RuntimeException("To solve the temporal expression you need to have a context, right now it is null.");
+        return operator.computeFor(context);
     }
 
-    public TemporalTag solve() {
-        return operator.computeFor(context);
+    public TemporalExpression addContext(TemporalTag context) {
+        this.context = context;
+        return this;
+    }
+
+    public TemporalTag context() {
+        return context;
     }
 
     public List<TemporalOperator> operators() {
@@ -51,5 +59,18 @@ public class TemporalExpression {
                 "context=" + context +
                 ", predicates=" + operator +
                 '}';
+    }
+
+    public static class Builder {
+        private SubjectStore subjectStore;
+
+        public Builder with(SubjectStore subjectStore) {
+            this.subjectStore = subjectStore;
+            return this;
+        }
+
+        public TemporalExpression build(String string) {
+            return new TemporalExpressionParser(this.subjectStore).parse(string);
+        }
     }
 }
