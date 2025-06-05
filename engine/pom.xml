@@ -10,7 +10,6 @@
     <packaging>jar</packaging>
 
     <name>Orchilla Engine</name>
-    <description>Módulo de análisis temporal para el proyecto Orchilla</description>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source> <!-- o 21 si usas Java 21 -->
