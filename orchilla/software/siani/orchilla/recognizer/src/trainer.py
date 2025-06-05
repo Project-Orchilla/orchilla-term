@@ -58,4 +58,4 @@ class DetectorDatasetReader:
 
 
 if __name__ == "__main__":
-    RecognizerTrainer().train(DetectorDatasetReader().read("data/dataset.tsv"), path="../model")
+    RecognizerTrainer().train(DetectorDatasetReader().read("data/train.tsv"), path="../model")

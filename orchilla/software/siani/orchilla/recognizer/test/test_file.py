@@ -5,16 +5,16 @@ from collections import defaultdict
 import pandas as pd
 from nervaluate import Evaluator
 
-from software.siani.orchilla.recognizer.src.recognizer import Recognizer
-
-recognizer = Recognizer("../model")
-
 y_true = []
 y_preds = []
 
 
 def parse(ents: list):
     return [{"label": label, "start": start, "end": end} for start, end, label in ents]
+
+
+def parse_pred(ents: list):
+    return [{"label": "TEMP_EXP", "start": start, "end": end} for start, end, _, _ in ents]
 
 
 def flip_nested_dict(dd):
@@ -32,17 +32,25 @@ def show(txt: str, ents: list):
     return result
 
 
-with open("test.tsv", "r", encoding="utf-8") as f:
+def show_ents(ents: list):
+    result = []
+    for start, end, extrc, label in ents:
+        result.append(extrc)
+    return result
+
+
+with open("test.tsv", "r", encoding="utf-8") as f1, open("C:/Users/juanc/PycharmProjects/date-transcriber/sutime.tsv", "r", encoding="utf-8") as f2:
     bad = 0
     blank = 0
     total = 0
-    for line in f:
+    for line1, line2 in zip(f1, f2):
         total += 1
-        text, entities = line.split("\t")
+        text, entities = line1.split("\t")
         y_true.append(parse(json.loads(entities)['entities']))
-        y_preds.append(recognizer.recognize_positions(text))
+        _, predict = line2.split("\t")
+        y_preds.append(parse_pred(json.loads(predict)['entities']))
         real = show(text, json.loads(entities)['entities'])
-        predicted = recognizer.recognize(text)
+        predicted = show_ents(json.loads(predict)['entities'])
         if len(real) == 0 and len(predicted) == 0:
             blank += 1
         if sorted(real) != sorted(predicted):
