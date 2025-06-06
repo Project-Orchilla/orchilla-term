@@ -3,6 +3,8 @@ import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 from software.siani.orchilla.decomposer.src.decomposer import Decomposer
+from software.siani.orchilla.formalizer.src.sorter import OperatorSorter
+from software.siani.orchilla.formalizer.src.transcriber import NumberTranscriber
 
 
 class Formalizer:
@@ -20,6 +22,10 @@ class Formalizer:
 
 if __name__ == "__main__":
     text = "Thursday following the third Monday in June"
-    units = list(reversed(Decomposer("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/decomposer/src/model").decompose(text)))
+    formalizer = Formalizer("../model")
+    decomposer = Decomposer("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/decomposer/src/model")
+    transcriber = NumberTranscriber()
+    sorter = OperatorSorter()
+    units = list(reversed(decomposer.decompose(text)))
     print(units)
-    print(">>".join([Formalizer("../model").formalize(unit) for unit in units]))
+    print(">>".join(sorter.sort([formalizer.formalize(transcriber.transcribe(unit)) for unit in units])))
