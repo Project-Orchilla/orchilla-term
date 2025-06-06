@@ -1,12 +1,14 @@
 import random
 
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.add import AddDateEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.last import LastDateEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.next import NextDateEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.relative import RelativeEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
-from orchilla.software.siani.orchilla.formalizer.src.data.generation.templates.sub import SubDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.ordinal import OrdinalDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.set import SetTimeEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.add import AddDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.last import LastDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.next import NextDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.fuzzy import FuzzyEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.set import SetDateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.generation.templates.sub import SubDateEntryTemplate
 
 
 class DateDatasetGenerator:
@@ -16,6 +18,7 @@ class DateDatasetGenerator:
 
     def generate(self, file: str):
         with open(file, 'w') as f:
+            f.write("operator\ttext\n")
             for i in range(self.num_samples):
                 f.write(random.choice(self.templates)())
                 if self.__is_last_line(i): continue
@@ -32,6 +35,7 @@ if __name__ == '__main__':
                                       LastDateEntryTemplate(),
                                       SetDateEntryTemplate(),
                                       SetTimeEntryTemplate(),
-                                      RelativeEntryTemplate()
-    ], num_samples=800000)
-    generator.generate("../datasets/sub.tsv")
+                                      OrdinalDateEntryTemplate(),
+                                      FuzzyEntryTemplate()
+                                      ], num_samples=800000)
+    generator.generate("../../data/dataset.tsv")

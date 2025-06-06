@@ -5,7 +5,7 @@ from collections import defaultdict
 import pandas as pd
 from nervaluate import Evaluator
 
-from orchilla.software.siani.orchilla.decomposer.src.decomposer import Decomposer
+from software.siani.orchilla.decomposer.src.decomposer import Decomposer
 
 decomposer = Decomposer("../model")
 

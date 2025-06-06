@@ -1,13 +1,13 @@
 import json
 import random
 
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.add import AddDateEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.last import LastDateEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.next import NextDateEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.relative import RelativeEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
-from orchilla.software.siani.orchilla.decomposer.src.data.generation.templates.sub import SubDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.add import AddDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.last import LastDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.next import NextDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.fuzzy import FuzzyEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.sub import SubDateEntryTemplate
 
 
 class DateDatasetGenerator:
@@ -41,6 +41,6 @@ if __name__ == '__main__':
                                       LastDateEntryTemplate(),
                                       SetDateEntryTemplate(),
                                       SetTimeEntryTemplate(),
-                                      RelativeEntryTemplate()
-                                      ], num_samples=300)
-    generator.generate("../dataset.tsv")
+                                      FuzzyEntryTemplate()
+                                      ], num_samples=2000)
+    generator.generate("../../data/dataset.tsv")

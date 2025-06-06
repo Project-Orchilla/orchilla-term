@@ -1,0 +1,45 @@
+at 5:05 PM the day before the first Tuesday in May	set M05>>first Tuesday>>sub 1d>>set h17m05
+at 6 PM on the second Saturday of the next month	add 1M>>second Saturday>>set h18m00
+last Thursday	last wd04
+At 7 PM sharp	set h19m00
+at 9:00 PM sharp	set h21m00
+in medieval times	set "medieval times"
+2 days ago	sub 2d
+this weekend	next 0we
+At 6:45 this morning	morning>>set h6m45
+at dusk	morning
+by 5PM	set h17m00
+day after Halloween	set "Halloween">>add 1d
+before next Friday	next wd05>>before
+late '90s	set D90>>late
+Thursday following the third Monday in June, at 9:30 AM	set h9m30>>set M06>>third Monday>>next wd04
+the Monday following next payday	next "payday">>next wd01
+at 7:45 in the afternoon	afternoon>>set h19m45
+at the beginning of next month	add 1M>>early
+at midnight on the Sunday before the next release cycle next "release cycle">>before>>set wd07>>set 00h00m
+the morning after the second Friday next month	add 1M>>second Friday>>after>>morning
+Monday after the long weekend	set "long weekend">>after>>set wd01
+in 3 weeks	add 3w
+On New Year’s morning	set "New Year">>morning
+first Tuesday after next month	add 1M>>first Tuesday
+On the last Thursday of April	set M04>>set n-1wd04
+past 5th of June	last M06>>set dM05
+in 5 minutes	add 5m
+Around 9:40 in the morning  morning>>set h09m40>>around
+Right after breakfast	set "breakfast">>after
+2024/07/17	set Y2024M07dm17
+in September 2019	set Y2019M09
+yesterday	sub 1d
+second Monday of the following month at 3 PM	set h15m00>>add 1M>>second Monday
+In the fall of 2023	set Y2023>>set S03
+early next week	add 1w>>early
+last year	sub 1Y
+two weeks from today	add 0d>>add 2w
+before 9:00 AM on the final Monday of the fiscal quarter	set "fiscal quarter">>set n-1wd01>>set h09m00>>before
+In late spring	set S01>>late
+next Monday morning	next wd01>>morning
+Thursday two weeks from now at 4:45 PM	set h16m45>>add 0d>>add 2w>>set wd04
+at 11 AM this coming Thursday	next wd04>>set h11m00
+20 minutes early	sub 20m
+at exactly 6:02 AM	set h06m02
+next Tuesday before noon	next wd02>>morning>>before
