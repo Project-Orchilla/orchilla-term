@@ -14,9 +14,9 @@ class RelationClassifierTrainer:
 
     def __init__(self):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        self.tokenizer = BertTokenizer.from_pretrained('bert-large-uncased')
         self.tokenizer.add_special_tokens({'additional_special_tokens': self.SpecialTokens})
-        self.model = BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=2).to(self.device)
+        self.model = BertForSequenceClassification.from_pretrained('bert-large-uncased', num_labels=2).to(self.device)
         self.model.resize_token_embeddings(len(self.tokenizer))
 
     def train(self, dataset_path: str, path: str):
@@ -79,3 +79,5 @@ class RelationClassifierTrainer:
         marked = text.replace(phrase1, f"[BOPHRASE] {phrase1} [EOPHRASE]", 1)
         marked = marked.replace(phrase2, f"[BOPHRASE] {phrase2} [EOPHRASE]", 1)
         return f"[BOTEXT] {marked} [EOTEXT]"
+
+RelationClassifierTrainer().train("dataset.tsv", "model")

@@ -9,7 +9,8 @@ public record CompositeTemporalOperator(List<TemporalOperator> temporalOperators
     @Override
     public TemporalTag computeFor(TemporalTag temporaltag) {
         TemporalTag result = temporaltag;
-        for (TemporalOperator temporalOperator : temporalOperators) result = temporalOperator.computeFor(result);
+        for (TemporalOperator temporalOperator : temporalOperators)
+            result = temporalOperator.computeFor(result);
         return result;
     }
 }

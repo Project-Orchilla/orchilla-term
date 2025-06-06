@@ -74,10 +74,7 @@ class TemporalDependencyDataset(InMemoryDataset):
         return edge_index, edge_label
 
     def add_negative_edges(self, pos_edge_index, num_nodes):
-        neg_candidates = list(
-            set((i, j) for i in range(num_nodes) for j in range(num_nodes) if i != j)
-            - set(tuple(e) for e in pos_edge_index)
-        )
+        neg_candidates = list(set((i, j) for i in range(num_nodes) for j in range(num_nodes) if i != j) - set(tuple(e) for e in pos_edge_index))
         num_pos = len(pos_edge_index)
         sampled_neg = neg_candidates[:num_pos]
 

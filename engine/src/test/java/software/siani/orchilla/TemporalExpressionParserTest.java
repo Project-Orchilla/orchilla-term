@@ -55,7 +55,9 @@ public class TemporalExpressionParserTest {
     public void should_be_two_set_predicates() {
         String string = "2025>>set M04d02";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
-                .isEqualTo(List.of(new SetMonthTemporalOperator(Month.Apr), new SetDayTemporalOperator(2)));
+                .isEqualTo(List.of(
+                        new SetMonthTemporalOperator(Month.Apr),
+                        new SetDayTemporalOperator(2)));
     }
 
     @Test
