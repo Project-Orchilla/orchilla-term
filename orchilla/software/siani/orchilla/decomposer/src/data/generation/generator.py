@@ -6,6 +6,7 @@ from software.siani.orchilla.decomposer.src.data.generation.templates.add import
 from software.siani.orchilla.decomposer.src.data.generation.templates.last import LastDateEntryTemplate
 from software.siani.orchilla.decomposer.src.data.generation.templates.next import NextDateEntryTemplate
 from software.siani.orchilla.decomposer.src.data.generation.templates.fuzzy import FuzzyEntryTemplate
+from software.siani.orchilla.decomposer.src.data.generation.templates.ordinal import OrdinalDateEntryTemplate
 from software.siani.orchilla.decomposer.src.data.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
 from software.siani.orchilla.decomposer.src.data.generation.templates.sub import SubDateEntryTemplate
 
@@ -41,6 +42,7 @@ if __name__ == '__main__':
                                       LastDateEntryTemplate(),
                                       SetDateEntryTemplate(),
                                       SetTimeEntryTemplate(),
+                                      OrdinalDateEntryTemplate(),
                                       FuzzyEntryTemplate()
-                                      ], num_samples=2000)
+                                      ], num_samples=1000)
     generator.generate("../../data/dataset.tsv")

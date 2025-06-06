@@ -5,18 +5,18 @@ At 7 PM sharp	set h19m00
 at 9:00 PM sharp	set h21m00
 in medieval times	set "medieval times"
 2 days ago	sub 2d
-this weekend	next 0we
-At 6:45 this morning	morning>>set h6m45
+this weekend	add 0we
+At 6:45 this morning	set h6m45>>morning
 at dusk	morning
 by 5PM	set h17m00
 day after Halloween	set "Halloween">>add 1d
-before next Friday	next wd05>>before
-late '90s	set D90>>late
-Thursday following the third Monday in June, at 9:30 AM	set h9m30>>set M06>>third Monday>>next wd04
+before next Friday	next n1wd05>>before
+late '90s	set "90s">>late
+Thursday following the third Monday in June, at 9:30 AM	set M06>>third Monday>>next wd04>>set h9m30
 the Monday following next payday	next "payday">>next wd01
-at 7:45 in the afternoon	afternoon>>set h19m45
-at the beginning of next month	add 1M>>early
-at midnight on the Sunday before the next release cycle next "release cycle">>before>>set wd07>>set 00h00m
+at 7:45 in the afternoon	set h19m45>>afternoon
+at the beginning of next month	add 1M>>Month>>early
+at midnight on the Sunday before the next release cycle	next "release cycle">>set wd07>>set 00h00m
 the morning after the second Friday next month	add 1M>>second Friday>>after>>morning
 Monday after the long weekend	set "long weekend">>after>>set wd01
 in 3 weeks	add 3w
@@ -25,7 +25,7 @@ first Tuesday after next month	add 1M>>first Tuesday
 On the last Thursday of April	set M04>>set n-1wd04
 past 5th of June	last M06>>set dM05
 in 5 minutes	add 5m
-Around 9:40 in the morning  morning>>set h09m40>>around
+Around 9:40 in the morning	morning>>set h09m40>>around
 Right after breakfast	set "breakfast">>after
 2024/07/17	set Y2024M07dm17
 in September 2019	set Y2019M09

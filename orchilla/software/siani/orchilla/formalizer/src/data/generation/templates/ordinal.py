@@ -5,31 +5,26 @@ from software.siani.orchilla.formalizer.src.data.generation.template import Date
 
 class OrdinalDateEntryTemplate(DateEntryTemplate):
     Ordinals = [
-        "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
-        "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth",
-        "twenty-first", "twenty-second", "twenty-third", "twenty-fourth", "twenty-fifth", "twenty-sixth", "twenty-seventh", "twenty-eighth", "twenty-ninth", "thirtieth",
-        "thirty-first", "thirty-second", "thirty-third", "thirty-fourth", "thirty-fifth", "thirty-sixth", "thirty-seventh", "thirty-eighth", "thirty-ninth", "fortieth",
-        "forty-first", "forty-second", "forty-third", "forty-fourth", "forty-fifth", "forty-sixth", "forty-seventh", "forty-eighth", "forty-ninth", "fiftieth",
-        "fifty-first", "fifty-second", "fifty-third"
+        "first", "second", "third"
     ]
-    HourTemplates = ["{} hour", "the {} hour"]
-    DayTemplates = ["{} day", "the {} day"]
-    WeekdayTemplates = ["{} {}", "the {} {}"]
-    WeekTemplates = ["{} week", "the {} week"]
-    WeekendTemplates = ["{} weekend", "the {} weekend"]
-    MonthTemplates = ["{} month", "the {} month"]
-    SemesterTemplates = ["{} Semester", "the {} Semester"]
-    QuarterTemplates = ["{} Quarter", "the {} Quarter"]
+    HourTemplates = ["{} hour", "the {} hour", "on the {} hour"]
+    DayTemplates = ["{} day", "the {} day", "on the {} day"]
+    WeekdayTemplates = ["{} {}", "the {} {}", "on the {} {}"]
+    WeekTemplates = ["{} week", "the {} week", "on the {} week"]
+    WeekendTemplates = ["{} weekend", "the {} weekend", "on the {} weekend"]
+    MonthTemplates = ["{} month", "the {} month", "on the {} month"]
+    SemesterTemplates = ["{} Semester", "the {} Semester", "on the {} Semester"]
+    QuarterTemplates = ["{} Quarter", "the {} Quarter", "on the {} Quarter"]
 
     def __call__(self):
         probability = random.random()
         if probability < 1/8: return self.__generate_hour()
         if probability < 2/8: return self.__generate_day()
-        if probability < 3/8: return self.__generate_weekday()
-        if probability < 4/8: return self.__generate_weekend()
-        if probability < 5/8: return self.__generate_week()
-        if probability < 6/8: return self.__generate_month()
-        if probability < 7/8: return self.__generate_quarter()
+        if probability < 5/10: return self.__generate_weekday()
+        if probability < 6/8: return self.__generate_weekend()
+        if probability < 7/8: return self.__generate_week()
+        if probability < 8/8: return self.__generate_month()
+        if probability < 9/8: return self.__generate_quarter()
         return self.__generate_semester()
 
     def __generate_hour(self):
@@ -54,7 +49,7 @@ class OrdinalDateEntryTemplate(DateEntryTemplate):
         return "{} W\t{}".format(ordinal, random.choice(self.WeekTemplates).format(ordinal))
 
     def __generate_month(self):
-        ordinal = random.choice(self.Ordinals[0:12])
+        ordinal = random.choice(self.Ordinals)
         return "{} M\t{}".format(ordinal, random.choice(self.MonthTemplates).format(ordinal))
 
     def __generate_quarter(self):

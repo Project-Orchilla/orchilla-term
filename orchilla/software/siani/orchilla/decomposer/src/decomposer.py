@@ -1,12 +1,15 @@
 import pickle
 
+from software.siani.orchilla.decomposer.src.sorter import OperatorSorter
+
 
 class Decomposer:
     def __init__(self, path: str):
         self.model = self.__load_model(path)
+        self.sorter = OperatorSorter()
 
     def decompose(self, event: str):
-        return [ent.text for ent in self.model(text=event).ents]
+        return self.sorter.sort([ent.text for ent in self.model(text=event).ents])
 
     def decompose_positions(self, text: str):
         return [{"label": "UNIT", "start": ent.start_char, "end": ent.end_char} for ent in self.model(text).ents]

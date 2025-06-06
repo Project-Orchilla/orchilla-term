@@ -9,7 +9,7 @@ class DateEntryTemplate(ABC):
     Seasons = ["Spring", "Summer", "Autumn", "Winter"]
     NumberSuffixes = {1: "st", 2: "nd", 3: "rd"}
     Percentages = [.25, .5, .45]
-    Events = ["the 20s", "the 30s", "the 40s", "the 50s", "the 60s", "the 70s", "the 80s", "the 90s", "Christmas", "Halloween", "Thanksgiving", "Independence Day", "New Year's Eve", "Second World War", "my birthday", "Football tournament", "Valentine's Day", "Easter", "April Fool's Day", "Mother's Day", "Father's Day", "the day i got promoted", "Black Friday", "Cyber Monday", "Wedding Anniversary", "Graduation Day", "Prom Night", "Football World Cup", "Oktoberfest", "St. Patrick's Day"]
+    Events = ["the 20s", "the 30s", "the 40s", "the 50s", "the 60s", "the 70s", "the 80s", "the 90s", "medieval times", "modern age", "Christmas", "Halloween", "Thanksgiving", "Independence Day", "New Year's Eve", "Second World War", "my birthday", "Football tournament", "Valentine's Day", "Easter", "April Fool's Day", "Mother's Day", "Father's Day", "the day i got promoted", "Black Friday", "Cyber Monday", "Wedding Anniversary", "Graduation Day", "Prom Night", "Football World Cup", "Oktoberfest", "St. Patrick's Day"]
 
     @abstractmethod
     def __call__(self):

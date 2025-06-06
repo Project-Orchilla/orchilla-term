@@ -40,7 +40,7 @@ class SetDateEntryTemplate(DateEntryTemplate):
 
     def __generate_day(self):
         day = self.number(365)
-        return "set d{:03d}\t{}".format(day, random.choice(self.DayTemplates).format(self.format_day(day)))
+        return "set d{:03d}\t{}".format(day, random.choice(self.DayTemplates).format(day))
 
     def __generate_month(self):
         month = random.choice(self.Months)
