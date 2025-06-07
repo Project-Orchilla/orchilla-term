@@ -15,7 +15,7 @@ class DecomposerTrainer:
 
     def train(self, dataset: list, path: str, language: str = "en"):
         self.__prepare_dataset(language=language, data=dataset)
-        train(f"../res/decomposer.cfg", "./output", overrides={"paths.train": "./train.spacy", "paths.dev": "./train.spacy"})
+        #train(f"../res/decomposer.cfg", "./output", overrides={"paths.train": "./train.spacy", "paths.dev": "./train.spacy"})
         self.__save_model(path)
 
     def __prepare_dataset(self, language: str, data: list):

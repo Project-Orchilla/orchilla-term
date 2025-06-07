@@ -15,7 +15,7 @@ public record SetWeekdayOperator(Weekday day, int value) implements TemporalOper
     public TemporalTag computeFor(TemporalTag temporaltag) {
         LocalDateTime weekday = temporaltag.head()
                 .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
-                .with(TemporalAdjusters.previousOrSame(DayOfWeek.of(day.ordinal())));
-        return new TemporalTag(weekday, weekday.plusDays(1).minusNanos(1), Period.Day, null);
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.of(day.ordinal() + 1)));
+        return new TemporalTag(weekday, weekday.plusDays(1).minusNanos(1), Period.Day, temporaltag.distribution().between(temporaltag.head(), temporaltag.tail()));
     }
 }

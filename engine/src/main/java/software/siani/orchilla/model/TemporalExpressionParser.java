@@ -20,6 +20,7 @@ import software.siani.orchilla.model.operators.events.LastWithArgumentsEventTemp
 import software.siani.orchilla.model.operators.events.NextWithArgumentsEventTemporalOperator;
 import software.siani.orchilla.model.operators.events.SetEventTemporalOperator;
 import software.siani.orchilla.model.operators.fuzzy.*;
+import software.siani.orchilla.model.operators.granularity.*;
 import software.siani.orchilla.model.operators.hour.AddHourTemporalOperator;
 import software.siani.orchilla.model.operators.hour.HourConstants;
 import software.siani.orchilla.model.operators.hour.SetHourTemporalOperator;
@@ -186,9 +187,22 @@ public class TemporalExpressionParser {
         if (string.startsWith("last")) return lastFor(string);
         if (string.startsWith("before")) return List.of(new Before());
         if (string.startsWith("after")) return List.of(new After());
-        if (string.startsWith("morning")) return List.of(new Morning());
-        if (string.startsWith("afternoon")) return List.of(new Afternoon());
-        throw new RuntimeException("Unknown operation " + string);
+        if (string.toLowerCase().startsWith("morning")) return List.of(new Morning());
+        if (string.toLowerCase().startsWith("afternoon")) return List.of(new Afternoon());
+        if (string.toLowerCase().startsWith("millennium")) return List.of(new MillenniumGranularityOperator());
+        if (string.toLowerCase().startsWith("century")) return List.of(new CenturyGranularityOperator());
+        if (string.toLowerCase().startsWith("decade")) return List.of(new DecadeGranularityOperator());
+        if (string.toLowerCase().startsWith("lustrum")) return List.of(new LustrumGranularityOperator());
+        if (string.toLowerCase().startsWith("year")) return List.of(new YearGranularityOperator());
+        if (string.toLowerCase().startsWith("semester")) return List.of(new SemesterGranularityOperator());
+        if (string.toLowerCase().startsWith("season")) return List.of(new SeasonGranularityOperator());
+        if (string.toLowerCase().startsWith("quarter")) return List.of(new QuarterGranularityOperator());
+        if (string.toLowerCase().startsWith("month")) return List.of(new MonthGranularityOperator());
+        if (string.toLowerCase().startsWith("week")) return List.of(new WeekGranularityOperator());
+        if (string.toLowerCase().startsWith("day")) return List.of(new DayGranularityOperator());
+        if (string.toLowerCase().startsWith("minute")) return List.of(new MinuteGranularityOperator());
+        if (string.toLowerCase().startsWith("second")) return List.of(new SecondGranularityOperator());
+        return List.of();
     }
 
     private static boolean isOrdinalOperator(String string) {
@@ -228,7 +242,7 @@ public class TemporalExpressionParser {
         if (arguments.containsKey("S")) result.add(new SetSeasonTemporalOperator(Season.values()[arguments.get("S").intValue() -1]));
         if (arguments.containsKey("M")) result.add(new SetMonthTemporalOperator(Month.values()[arguments.get("M").intValue()-1]));
         if (arguments.containsKey("w")) result.add(new SetWeekOperator(arguments.get("w").intValue()));
-        if (arguments.containsKey("wd")) result.add(new SetWeekdayOperator(Weekday.values()[arguments.get("wd").intValue()-1], arguments.get("n").intValue()));
+        if (arguments.containsKey("wd")) result.add(new SetWeekdayOperator(Weekday.values()[arguments.get("wd").intValue()-1], arguments.getOrDefault("n", 1.).intValue()));
         if (arguments.containsKey("we")) result.add(new SetWeekendOperator(arguments.get("we").intValue()));
         if (arguments.containsKey("d")) result.add(new SetDayTemporalOperator(arguments.get("d").intValue()));
         if (arguments.containsKey("h")) result.add(new SetHourTemporalOperator(arguments.get("h").intValue()));

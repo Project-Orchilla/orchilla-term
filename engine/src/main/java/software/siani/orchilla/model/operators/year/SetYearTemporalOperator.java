@@ -12,7 +12,7 @@ public record SetYearTemporalOperator(int year) implements TemporalOperator {
     public TemporalTag computeFor(TemporalTag temporaltag) {
         LocalDateTime start = yearOfPredicate();
         LocalDateTime end = yearOfPredicate().plusYears(1).minusNanos(1);
-        return new TemporalTag(start, end, Period.Year, null);
+        return new TemporalTag(start, end, Period.Year, temporaltag.distribution().between(start, end));
     }
 
     private LocalDateTime yearOfPredicate() {
