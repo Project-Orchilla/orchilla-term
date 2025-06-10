@@ -55,7 +55,3 @@ class DetectorDatasetReader:
                 source, target = line.rstrip().split("\t")
                 dataset.append((source, json.loads(target)['entities']))
         return dataset
-
-
-if __name__ == "__main__":
-    RecognizerTrainer().train(DetectorDatasetReader().read("data/train.tsv"), path="../model")

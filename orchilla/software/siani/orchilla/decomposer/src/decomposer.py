@@ -12,7 +12,10 @@ class Decomposer:
         return self.sorter.sort([ent.text for ent in self.model(text=event).ents])
 
     def decompose_positions(self, text: str):
-        return [{"label": "UNIT", "start": ent.start_char, "end": ent.end_char} for ent in self.model(text).ents]
+        ents = []
+        for ent in self.model(text).ents:
+            ents.append({"label": "UNIT", "start": ent.start_char, "end": ent.end_char})
+        return ents
 
     def __load_model(self, path: str):
         with open(f"{path}/decomposer.mdl", 'rb') as f:

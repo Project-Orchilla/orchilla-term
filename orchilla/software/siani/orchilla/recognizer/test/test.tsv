@@ -16,7 +16,7 @@ The concert is this weekend.	{"entities": [[15, 27, "TEMP_EXP"]]}
 The door handle feels cold.	{"entities": []}
 The camera captures vibrant colors.	{"entities": []}
 At 6:45 this morning, the doorbell rang.	{"entities": [[0, 20, "TEMP_EXP"]]}
-The lightbulb flickered at dusk.	{"entities": [24, 31, "TEMP_EXP"]}
+The lightbulb flickered at dusk.	{"entities": [[24, 31, "TEMP_EXP"]]}
 The microwave heats food evenly.	{"entities": []}
 I'll be back by 5PM.	{"entities": [[13, 19, "TEMP_EXP"]]}
 We always have leftovers the day after Halloween.	{"entities": [[29, 48, "TEMP_EXP"]]}

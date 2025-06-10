@@ -1,11 +1,45 @@
-the start of the next semester	["the start", "of the next semester"]
-the second Monday of October	["the second Monday", "of October"]
-January 1st	["January 1st"]
-the last Friday in December	["the last Friday", "in December"]
-September 5th	["September 5th"]
-the third week of June	["the third week", "of June"]
-March 9th	["March 9th"]
-June 4th of the next year	["June 4th", "of the next year"]
-tomorrow at 5PM	["tomorrow", "at 5PM"]
-halfway through thursday	["halfway through", "thursday"]
-the last Friday of April	["the last Friday", "of April"]
+at 5:05 PM the day before the first Tuesday in May	{"entities": [[0, 10, "UNIT"], [11, 25, "UNIT"], [26, 43, "UNIT"], [44, 50, "UNIT"]]}
+at 6 PM on the second Saturday of the next month	{"entities": [[0, 7, "UNIT"], [8, 30, "UNIT"], [31, 48, "UNIT"]]}
+last Thursday	{"entities": [[0, 13, "UNIT"]]}
+At 7 PM sharp	{"entities": [[0, 7, "UNIT"], [8, 13, "UNIT"]]}
+at 9:00 PM sharp	{"entities": [[0, 10, "UNIT"], [11, 16, "UNIT"]]}
+in medieval times	{"entities": [[0, 17, "UNIT"]]}
+2 days ago	{"entities": [[0, 10, "UNIT"]]}
+this weekend	{"entities": [[0, 12, "UNIT"]]}
+At 6:45 this morning	 {"entities": [[0, 7, "UNIT"], [8, 20, "UNIT"]]}
+at dusk morning	{"entities": [[0, 7, "UNIT"], [8, 15, "UNIT"]]}
+by 5PM	{"entities": [[0, 6, "UNIT"]]}
+day after Halloween	{"entities": [[0, 9, "UNIT"], [10, 19, "UNIT"]]}
+before next Friday	{"entities": [[0, 6, "UNIT"], [7, 18, "UNIT"]]}
+late '90s	{"entities": [[0, 4, "UNIT"], [6, 9, "UNIT"]]}
+Thursday following the third Monday in June, at 9:30 AM	{"entities": [[0, 18, "UNIT"], [19, 35, "UNIT"], [36, 43, "UNIT"], [45, 55, "UNIT"]]}
+the Monday following next payday	{"entities": [[0, 10, "UNIT"], [11, 32, "UNIT"]]}
+at 7:45 in the afternoon	{"entities": [[0, 7, "UNIT"], [8, 24, "UNIT"]]}
+at the beginning of next month	{"entities": [[0, 16, "UNIT"], [20, 30, "UNIT"]]}
+at midnight on the Sunday before the next release cycle	{"entities": [[0, 11, "UNIT"], [12, 25, "UNIT"], [26, 32, "UNIT"], [33, 55, "UNIT"]]}
+the morning after the second Friday next month	{"entities": [[0, 11, "UNIT"], [12, 17, "UNIT"], [18, 35, "UNIT"], [36, 46, "UNIT"]]}
+Monday after the long weekend	{"entities": [[0, 6, "UNIT"], [7, 12, "UNIT"], [13, 29, "UNIT"]]}
+in 3 weeks	{"entities": [[0, 10, "UNIT"]]}
+On New Year’s morning	{"entities": [[0, 11, "UNIT"], [14, 21, "UNIT"]]}
+first Tuesday after next month	{"entities": [[0, 13, "UNIT"], [14, 19, "UNIT"], [20, 30, "UNIT"]]}
+On the last Thursday of April	{"entities": [[0, 20, "UNIT"], [21, 29, "UNIT"]]}
+past 5th of June	{"entities": [[0, 16, "UNIT"]]}
+in 5 minutes	{"entities": [[0, 12, "UNIT"]]}
+Around 9:40 in the morning	{"entities": [[0, 6, "UNIT"], [7, 11, "UNIT"], [12, 26, "UNIT"]]}
+Right after breakfast	{"entities": [[0, 11, "UNIT"], [12, 21, "UNIT"]]}
+2024/07/17	{"entities": [[0, 10, "UNIT"]]}
+in September 2019	{"entities": [[0, 17, "UNIT"]]}
+yesterday	{"entities": [[0, 9, "UNIT"]]}
+second Monday of the following month at 3 PM	{"entities": [[0, 13, "UNIT"], [14, 36, "UNIT"], [37, 44, "UNIT"]]}
+In the fall of 2023	{"entities": [[0, 11, "UNIT"], [12, 19, "UNIT"]]}
+early next week	{"entities": [[0, 5, "UNIT"], [6, 15, "UNIT"]]}
+last year	{"entities": [[0, 9, "UNIT"]]}
+two weeks from today	{"entities": [[0, 9, "UNIT"], [10, 20, "UNIT"]]}
+before 9:00 AM on the final Monday of the fiscal quarter	{"entities": [[0, 6, "UNIT"], [7, 14, "UNIT"], [15, 34, "UNIT"], [35, 56, "UNIT"]]}
+In late spring	{"entities": [[0, 7, "UNIT"], [8, 14, "UNIT"]]}
+next Monday morning	{"entities": [[0, 11, "UNIT"], [12, 19, "UNIT"]]}
+Thursday two weeks from now at 4:45 PM	{"entities": [[0, 8, "UNIT"], [9, 18, "UNIT"], [19, 27, "UNIT"], [28, 38, "UNIT"]]}
+at 11 AM this coming Thursday	{"entities": [[0, 8, "UNIT"], [9, 29, "UNIT"]]}
+20 minutes early	{"entities": [[0, 10, "UNIT"], [11, 16, "UNIT"]]}
+at exactly 6:02 AM	{"entities": [[0, 18, "UNIT"]]}
+next Tuesday before noon	{"entities": [[0, 12, "UNIT"], [13, 19, "UNIT"], [20, 24, "UNIT"]]}

@@ -1,7 +1,7 @@
 from software.siani.orchilla.decomposer.src.decomposer import Decomposer
 from software.siani.orchilla.formalizer.src.formalizer import Formalizer
 
-decomposer = Decomposer(path="C:/Users/juanc/PycharmProjects/date-transcriber/splitter/model")
+decomposer = Decomposer(path="../../decomposer/model")
 formalizer = Formalizer(path="../model")
 
 with open("test.tsv", "r", encoding="utf-8") as f:

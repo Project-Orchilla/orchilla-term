@@ -98,7 +98,3 @@ class Logger(TrainerCallback):
         self.logging_file.write(json.dumps(logs))
         self.logging_file.write("\n")
         self.logging_file.flush()
-
-
-if __name__ == "__main__":
-    FormalizerTrainer().train(dataset="data/dataset.tsv", path="../model")

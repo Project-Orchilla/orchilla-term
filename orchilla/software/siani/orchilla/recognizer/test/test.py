@@ -1,8 +1,7 @@
-import ast
 import json
+import pprint
 from collections import defaultdict
 
-import pandas as pd
 from nervaluate import Evaluator
 
 from software.siani.orchilla.recognizer.src.recognizer import Recognizer
@@ -51,11 +50,7 @@ with open("test.tsv", "r", encoding="utf-8") as f:
             print("Predicted: [" + ', '.join(predicted) + "]-------> Real: [" + ', '.join(real) + "]")
             print("-"*50)
 
-print("Has fallado {} de {}".format(bad, total))
-print("blanos", blank)
-evaluator = Evaluator(y_true, y_preds, tags=['TEMP_EXP'], loader="default")
 
+evaluator = Evaluator(y_true, y_preds, tags=['TEMP_EXP'], loader="default")
 results, results_by_tag, result_indices, result_indices_by_tag = evaluator.evaluate()
-#print(pd.DataFrame(flip_nested_dict(results)))
-import pprint
 pprint.pprint(results)

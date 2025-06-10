@@ -55,7 +55,3 @@ class DecomposerDatasetReader:
                 source, target = line.rstrip().split("\t")
                 dataset.append((source, json.loads(target)['entities']))
         return dataset
-
-
-if __name__ == "__main__":
-    DecomposerTrainer().train(DecomposerDatasetReader().read("data/dataset.tsv"), path="../model")
