@@ -13,7 +13,7 @@ public record SetMonthTemporalOperator(Month month) implements TemporalOperator 
 
     @Override
     public TemporalTag computeFor(TemporalTag temporaltag) {
-        LocalDate startDate = LocalDate.of(temporaltag.head().getYear(), month.ordinal(), 1);
+        LocalDate startDate = LocalDate.of(temporaltag.head().getYear(), month.ordinal() + 1, 1);
         LocalDate endDate = startDate.with(TemporalAdjusters.lastDayOfMonth());
         return new TemporalTag(startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX), Period.Month, temporaltag.distribution().between(startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX)));
     }

@@ -4,7 +4,7 @@ import torch
 from torch_geometric.data import DataLoader
 from transformers import AutoModel, AutoTokenizer
 
-from software.siani.orchilla.relation_classifier.relation_classifier_gnn.GNNModel import TemporalGNN
+from software.siani.orchilla.relation_classifier.relation_classifier_gnn.model import RelationalClassifier
 from software.siani.orchilla.relation_classifier.relation_classifier_gnn.dataset import TemporalDependencyDataset
 
 
@@ -20,7 +20,7 @@ class RelationClassifierTrainer:
     def train(self, dataset_path: str, path: str):
         dataset = TemporalDependencyDataset(Path(dataset_path), self.tokenizer, self.encoder)
         training_dataloader, validation_dataloader = self.__split(dataset)
-        model = TemporalGNN(in_channels=768, hidden_channels=256).to(self.device)
+        model = RelationalClassifier(in_channels=768, hidden_channels=256).to(self.device)
         optimizer = torch.optim.Adam(list(model.parameters()) + list(self.encoder.parameters()), lr=self.lr)
         criterion = torch.nn.BCEWithLogitsLoss()
         best_f1 = 0
@@ -37,7 +37,7 @@ class RelationClassifierTrainer:
     def __split(self, dataset: TemporalDependencyDataset):
         return DataLoader(dataset[:160], batch_size=1, shuffle=True), DataLoader(dataset[160:], batch_size=1)
 
-    def __train(self, model: TemporalGNN, dataloader: DataLoader, optimizer: torch.optim.Optimizer, criterion: torch.nn.BCEWithLogitsLoss):
+    def __train(self, model: RelationalClassifier, dataloader: DataLoader, optimizer: torch.optim.Optimizer, criterion: torch.nn.BCEWithLogitsLoss):
         model.train()
         total_loss = 0
         for batch in dataloader:
@@ -52,7 +52,7 @@ class RelationClassifierTrainer:
             total_loss += loss.item()
         return total_loss
 
-    def __evaluate(self, model: TemporalGNN, dataloader: DataLoader):
+    def __evaluate(self, model: RelationalClassifier, dataloader: DataLoader):
         model.eval()
         y_true, y_pred = [], []
         with torch.no_grad():
