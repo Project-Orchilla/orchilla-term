@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-from software.siani.orchilla.formalizer.src.transcriber import NumberTranscriber
+from software.siani.orchilla.formalizer.src.sorter import OperatorSorter
 
 
 class Formalizer:
@@ -13,12 +13,10 @@ class Formalizer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = AutoModelForSeq2SeqLM.from_pretrained(path, local_files_only=True).to(self.device)
         self.tokenizer = AutoTokenizer.from_pretrained(path, local_files_only=True)
-        self.number_transcriber = NumberTranscriber()
+        self.sorter = OperatorSorter()
 
     def formalize(self, units: list) -> str:
-        for unit in units:
-            print(unit)
-        return ">>".join([self.__replace_symbols(self.__to_operator(unit)) for unit in units])
+        return ">>".join(self.sorter.sort([self.__replace_symbols(self.__to_operator(unit)) for unit in units]))
 
     def __to_operator(self, unit):
         input_text = f"translate: {unit}"

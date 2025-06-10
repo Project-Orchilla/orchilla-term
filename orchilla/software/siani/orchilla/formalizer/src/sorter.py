@@ -6,14 +6,16 @@ class OperatorSorter:
 
     def sort(self, operators: list) -> list:
         result = {}
+        original_order = {op: i for i, op in enumerate(reversed(operators))}
         for operator in operators:
-            tokens = re.findall(r"\D+|\d+", self.__remove_operator(operator))
+            unit = operator.split(">>")[0]
+            tokens = re.findall(r"\D+|\d+", self.__remove_operator(unit))
             for token in tokens:
                 if token in self.Granularities.keys():
                     if operator not in result or result[operator] < self.Granularities.get(token):
                         result[operator] = self.Granularities.get(token)
             if operator not in result: result[operator] = 14
-        return list(reversed(sorted(result, key=lambda op: result[op])))
+        return list(sorted(operators, key=lambda op: (result[op], original_order[op])))
 
     def __remove_operator(self, operator):
         start = operator.find(" ")
