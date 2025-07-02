@@ -16,7 +16,7 @@ class RecognizerTrainer:
     def train(self, dataset: list, path: str, language: str = "en"):
         self.__prepare_dataset(language=language, data=dataset)
         train(f"../res/recognizer.cfg", "./output", overrides={"paths.train": "./train.spacy", "paths.dev": "./train.spacy"})
-        self.__save_model(path)
+        self.__save_model(path, language)
 
     def __prepare_dataset(self, language: str, data: list):
         nlp = self.__load(language)
@@ -31,9 +31,9 @@ class RecognizerTrainer:
             dataset.add(doc)
         dataset.to_disk("./train.spacy")
 
-    def __save_model(self, path: str):
-        Path(path).mkdir(parents=True, exist_ok=True)
-        with open(f"{path}/recognizer.mdl", mode='wb') as f:
+    def __save_model(self, path: str, language: str):
+        Path(f"{path}/{language}").mkdir(parents=True, exist_ok=True)
+        with open(f"{path}/{language}/recognizer.mdl", mode='wb') as f:
             pickle.dump(spacy.load("./output/model-best"), f)
         shutil.rmtree("./output")
         os.remove("./train.spacy")
@@ -55,3 +55,7 @@ class DetectorDatasetReader:
                 source, target = line.rstrip().split("\t")
                 dataset.append((source, json.loads(target)['entities']))
         return dataset
+
+
+if __name__ == "__main__":
+    RecognizerTrainer().train(DetectorDatasetReader.read("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/recognizer/src/data/es/train.tsv"), "C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/recognizer/model", "es")

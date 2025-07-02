@@ -12,11 +12,13 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, Seq2SeqTrainingAr
 class FormalizerTrainer:
     MaxInputLength = 1024
     MaxTargetLength = 512
+    Models = {"en": "google-t5/t5-small", "es": "google/mt5-small"}
 
-    def __init__(self, batch_size: int = 32):
+    def __init__(self, language: str, batch_size: int = 32):
+        self.language = language
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.tokenizer = AutoTokenizer.from_pretrained("google-t5/t5-small")
-        self.model = AutoModelForSeq2SeqLM.from_pretrained("google-t5/t5-small").to(self.device)
+        self.tokenizer = AutoTokenizer.from_pretrained(self.Models[language])
+        self.model = AutoModelForSeq2SeqLM.from_pretrained(self.Models[language]).to(self.device)
         self.metric = load("rouge")
         self.batch_size = batch_size
 
@@ -85,8 +87,8 @@ class FormalizerTrainer:
         return {k: round(v, 4) for k, v in result.items()}
 
     def __save_model(self, path: str, trainer):
-        Path(path).mkdir(parents=True, exist_ok=True)
-        trainer.save_model(path)
+        Path(f"{path}/{self.language}").mkdir(parents=True, exist_ok=True)
+        trainer.save_model(f"{path}/{self.language}")
 
 
 class Logger(TrainerCallback):

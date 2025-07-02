@@ -1,14 +1,14 @@
 import json
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.fuzzy import FuzzyEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.last import LastDateEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.next import NextDateEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.ordinal import OrdinalDateEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.sub import SubDateEntryTemplate
-from software.siani.orchilla.decomposer.src.data.generation.templates.add import AddDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.fuzzy import FuzzyEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.last import LastDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.next import NextDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.ordinal import OrdinalDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.set import SetDateEntryTemplate, SetTimeEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.sub import SubDateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.templates.add import AddDateEntryTemplate
 
 
 class DateDatasetGenerator:
@@ -17,7 +17,7 @@ class DateDatasetGenerator:
         self.num_samples = num_samples
 
     def generate(self, file: str):
-        with open(file, 'w') as f:
+        with open(file, 'w', encoding='utf-8') as f:
             for i in range(self.num_samples):
                 entities = []
                 prev = 0
@@ -45,4 +45,4 @@ if __name__ == '__main__':
                                       OrdinalDateEntryTemplate(),
                                       FuzzyEntryTemplate()
                                       ], num_samples=10000)
-    generator.generate("../../data/dataset.tsv")
+    generator.generate("../dataset.tsv")

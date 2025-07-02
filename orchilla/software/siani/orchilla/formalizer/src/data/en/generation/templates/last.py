@@ -1,6 +1,6 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.en.generation.template import DateEntryTemplate
 
 
 class LastDateEntryTemplate(DateEntryTemplate):
@@ -22,36 +22,39 @@ class LastDateEntryTemplate(DateEntryTemplate):
 
     def __generate_scale(self):
         scale = random.choice(self.Scales)
-        return random.choice(self.ScaleTemplates).format(scale.replace("-", " "))
+        return "sub 1{}>>{}\t{}".format(self.code_of(scale), scale, random.choice(self.ScaleTemplates).format(scale.replace("-", " ")))
 
     def __generate_weekday(self):
         n = self.number()
         weekday = random.choice(self.Weekdays)
         if n == 1:
             template = random.choice(self.SingleTemplates)
-            return template.format(weekday)
+            return "last n1wd{}\t{}".format(weekday, template.format(weekday))
         template = random.choice(self.MultipleTemplates)
-        return template.format(n, weekday)
+        return "last n{}wd{}\t{}".format(n, weekday, template.format(n, weekday))
 
     def __generate_season(self):
         n = self.number()
         season = random.choice(self.Seasons)
         if n == 1:
-            return random.choice(self.SingleTemplates).format(season)
-        return random.choice(self.MultipleTemplates).format(n, season)
+            template = random.choice(self.SingleTemplates)
+            return "last n1S{}\t{}".format(season, template.format(season))
+        template = random.choice(self.MultipleTemplates)
+        return "last n{}S{}\t{}".format(n, season, template.format(n, season))
 
     def __generate_decade(self):
         decade = random.choice([10, 20, 30, 40, 50, 60, 70, 80, 90])
-        return random.choice(self.DecadeTemplates).format(decade)
+        return "last D{}\t{}".format(decade, random.choice(self.DecadeTemplates).format(decade))
 
     def __generate_day(self):
         n = self.number()
-        return random.choice(self.DayOfMonthTemplates).format(self.format_day(day=n))
+        return "last d{}\t{}".format(n, random.choice(self.DayOfMonthTemplates).format(self.format_day(day=n)))
 
     def __generate_default(self):
         day = self.number(size=32, zero=False)
         month = random.choice(self.Months)
-        return self.__generate_day_month(day, month) if random.random() < .5 else self.__generate_month_day(month, day)
+        entry = self.__generate_day_month(day, month) if random.random() < .5 else self.__generate_month_day(month, day)
+        return "last M{}>>set d{:02d}\t{}".format(month, day, entry)
 
     def __generate_day_month(self, day: int, month: int):
         return random.choice(self.DayMonthTemplates).format(self.format_day(day), month)

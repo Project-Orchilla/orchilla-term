@@ -1,21 +1,21 @@
 import random
 
-from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.es.generation.template import DateEntryTemplate
 
 
 class SetDateEntryTemplate(DateEntryTemplate):
-    WeekdayTemplates = ["{}", "on {}", "at {}", "during {}"]
-    LastWeekdayTemplates = ["last {}", "the last {}", "on the last {}", "in the last {}"]
-    PenultimateWeekdayTemplates = ["penultimate {}", "the penultimate {}", "on the penultimate {}", "in the penultimate {}"]
-    DayTemplates = ["on the {}", "{}", "on the {} day", "by the {}", "by the {} day", "for the {}", "for the {} day", "this {} day", "this {}", "the {}", "the {} day", "the day {}"]
-    MonthTemplates = ["of {}", "{}", "by {}", "this {}", "on {}"]
-    YearTemplates = ["in the year {}", "year {}", "in {}"]
-    SeasonTemplates = ["this {}", "in {}", "in the {}"]
-    DayMonthTemplates = ["{} {}", "at {} {}", "at {} of {}", "in the {} of {}", "in the {} {}", "on {} {}", "on the {} {}", "on {} of {}", "{} {}", "{} of {}", "{}/{}", "{}-{}"]
-    MonthDayTemplates = ["{} {}", "at {} {}", "in {} {}", "on {} {}", "on the {} {}"]
-    MonthYearTemplates = ["{} {}", "at {} {}", "in {} {}", "on {} {}"]
-    DayMonthYearTemplates = ["{} {} {}", "{} of {} {}", "on {} {} {}", "on {} of {} {}", "on the {} {} {}", "on the {} of {} {}", "{} {}, {}", "{} of {}, {}", "on the {} {}, {}", "on {} {}, {}", "on the {} of {}, {}"]
-    MonthDayYearTemplates = ["{} {}, {}", "{} {} {}", "on {} {}, {}", "on {} {} {}", "at {} {}, {}", "at {} {} {}", "in {} {}, {}", "in {} {} {}"]
+    WeekdayTemplates = ["{}", "en {}", "el {}", "durante {}"]
+    LastWeekdayTemplates = ["pasado {}", "el pasado {}", "en el pasado {}"]
+    PenultimateWeekdayTemplates = ["penúltimo {}", "el penúltimo {}", "en el penúltimo {}"]
+    DayTemplates = ["en el {}", "{}", "en el {} día", "por el {}", "por el {} día", "para el {}", "para el {} día", "este {} día", "este {}", "el {}", "el {} día", "el día {}"]
+    MonthTemplates = ["de {}", "{}", "por {}", "este {}", "en {}"]
+    YearTemplates = ["en el año {}", "año {}", "en {}"]
+    SeasonTemplates = ["este {}", "en {}", "en el {}"]
+    DayMonthTemplates = ["{} {}", "a las {} {}", "en el {} {}", "{}/{}", "{}-{}"]
+    MonthDayTemplates = ["{} {}", "en {} {}"]
+    MonthYearTemplates = ["{} {}", "el {} {}", "en {} {}", ]
+    DayMonthYearTemplates = ["{} {} {}", "{} de {} {}", "en {} {} {}", "en {} de {} {}", "en el {} {} {}", "en el {} de {} {}", "{} {}, {}", "{} de {}, {}", "en el {} {}, {}", "en {} {}, {}", "en el {} de {}, {}"]
+    MonthDayYearTemplates = ["{} {}, {}", "{} {} {}", "en {} {}, {}", "en {} {} {}", "el {} {}, {}", "el {} {} {}", "en {} {}, {}", "en {} {} {}"]
     YearMonthDayTemplates = ["{}-{}-{}", "{}/{}/{}"]
 
     def __call__(self):
@@ -97,16 +97,16 @@ class SetDateEntryTemplate(DateEntryTemplate):
 
 
 class SetTimeEntryTemplate(DateEntryTemplate):
-    HourTemplates = ["at {}"]
-    OneQuarterTemplates = ["at quarter past {}", "quarter past {}", "at 15 minutes past {}", "at {} 15"]
-    ThreeQuarterTemplates = ["at 45 minutes past {}", "at {} 45", "at {}:45"]
-    ThreeQuarterPlusTemplates = ["15 to {}", "at quarter to {}", "quarter to {}", "at {}:15"]
-    HalvesTemplates = ["at half past {}", "at 30 minutes past {}", "half past {}", "at {}:30"]
-    AmTemplates = ["at {:02d}:{:02d} AM", "at {:02d}:{:02d}AM", "at {:02d}:{:02d} in the morning",]
-    PmTemplates = ["at {:02d}:{:02d} PM", "at {:02d}:{:02d}PM", "at {:02d}:{:02d} in the afternoon", "at {:02d}:{:02d} in the evening"]
-    MiddayTemplates = ["at noon", "noon", "at midday", "midday"]
-    MidnightTemplates = ["at midnight", "midnight"]
-    TimeTemplates = ["at {:02d}:{:02d}"]
+    HourTemplates = ["a las {}"]
+    OneQuarterTemplates = ["a las {} y cuarto", "{} y cuarto", "15 minutos pasados las {}", "a las {} y 15"]
+    ThreeQuarterTemplates = ["a las {} y tres cuartos", "a las {} 45", "a las {}:45"]
+    ThreeQuarterPlusTemplates = ["{} menos cuarto", "cuarto para las {}"]
+    HalvesTemplates = ["a las {} y media", "{} y media", "{} y 30", "a las {}:30"]
+    AmTemplates = ["a las {:02d}:{:02d} AM", "a las {:02d}:{:02d}AM", "a las {:02d}:{:02d} de la mañana",]
+    PmTemplates = ["a las {:02d}:{:02d} PM", "a las {:02d}:{:02d}PM", "a las {:02d}:{:02d} de la tarde"]
+    MiddayTemplates = ["mediodia"]
+    MidnightTemplates = ["a medianoche", "medianoche"]
+    TimeTemplates = ["a las {:02d}:{:02d}"]
 
     def __call__(self):
         probability = random.random()

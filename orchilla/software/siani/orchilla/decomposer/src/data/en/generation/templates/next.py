@@ -1,6 +1,6 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.en.generation.template import DateEntryTemplate
 
 
 class NextDateEntryTemplate(DateEntryTemplate):

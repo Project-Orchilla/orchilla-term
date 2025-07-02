@@ -1,6 +1,6 @@
 import random
 
-from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.en.generation.template import DateEntryTemplate
 
 
 class SubDateEntryTemplate(DateEntryTemplate):
@@ -17,20 +17,20 @@ class SubDateEntryTemplate(DateEntryTemplate):
         return self.__generate_default()
 
     def __generate_yesterday(self):
-        return "sub 1d\tYesterday" if random.random() >= 0.5 else "sub 2d\tThe day before yesterday"
+        return "Yesterday" if random.random() >= 0.5 else "The day before yesterday"
 
     def __generate_time(self):
         if random.random() >= 0.5:
-            return "sub 15m\t{}".format(random.choice(self.TimeTemplates).format(random.choice(["a quarter of an hour", "quarter of an hour", "a quarter hour"])))
+            return random.choice(self.TimeTemplates).format(random.choice(["a quarter of an hour", "quarter of an hour", "a quarter hour"]))
         if random.random() >= 0.5:
-            return "sub 45m\t{}".format(random.choice(self.TimeTemplates).format(random.choice(["three quarters of an hour", "three-quartes of an hour"])))
-        return "sub 30m\t{}".format(random.choice(self.TimeTemplates).format(random.choice(["half an hour", "a half hour"])))
+            return random.choice(self.TimeTemplates).format(random.choice(["three quarters of an hour", "three-quartes of an hour"]))
+        return random.choice(self.TimeTemplates).format(random.choice(["half an hour", "a half hour"]))
 
     def __generate_weekend(self):
         n = self.number()
         if n == 1:
-            return "sub 1we\t{}".format(random.choice(self.PastWeekendTemplates).format("weekend"))
-        return "sub {}we\t{}".format(n, random.choice(self.MultipleWeekendTemplates).format(n))
+            return random.choice(self.PastWeekendTemplates).format("weekend")
+        return random.choice(self.MultipleWeekendTemplates).format(n)
 
     def __generate_default(self):
         day = self.number(zero=True)
@@ -40,5 +40,5 @@ class SubDateEntryTemplate(DateEntryTemplate):
         if random.random() <= 0.3:
             percentage = random.choice(self.Percentages)
             template += " " + self.textify(percentage)
-            return "sub {}{}\t{}".format(day + percentage, self.code_of(scale), template.format(day, scale.replace("-", " "))).replace("Centurys", "Centuries")
-        return "sub {}{}\t{}".format(day, self.code_of(scale), template.format(day, scale.replace("-", " "))).replace("Centurys", "Centuries")
+            return template.format(day, scale.replace("-", " ")).replace("Centurys", "Centuries")
+        return template.format(day, scale.replace("-", " ")).replace("Centurys", "Centuries")

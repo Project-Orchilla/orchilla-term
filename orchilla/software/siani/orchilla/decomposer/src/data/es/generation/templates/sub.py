@@ -1,13 +1,13 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.template import DateEntryTemplate
 
 
 class SubDateEntryTemplate(DateEntryTemplate):
-    TimeTemplates = ["{} ago", "{} back", "{} prior", "{} earlier", "{} before"]
-    PastWeekendTemplates = ["last {}", "past {}", "this past {}", "the {} before", "previous {}", "{} prior"]
-    MultipleWeekendTemplates = ["{} weekends ago", "{} weekends back", "{} weekends before", "the prior {} weekends", "last {} weekends"]
-    DefaultTemplates = ["{} {}s ago", "{} {}s back", "{} {}s prior", "{} {}s earlier", "{} {}s before"]
+    TimeTemplates = ["hace {}", "{} atrás", "{} antes", "{} previamente", "{} anteriormente"]
+    PastWeekendTemplates = ["el pasado {}", "el {} pasado", "este pasado {}", "el {} anterior", "el {} previo", "{} antes"]
+    MultipleWeekendTemplates = ["hace {} fines de semana", "{} fines de semana atrás", "{} fines de semana antes", "los {} fines de semana anteriores", "los últimos {} fines de semana"]
+    DefaultTemplates = ["hace {} {}s", "{} {}s atrás", "{} {}s antes", "{} {}s previamente", "{} {}s anteriormente"]
 
     def __call__(self):
         probability = random.random()
@@ -17,19 +17,19 @@ class SubDateEntryTemplate(DateEntryTemplate):
         return self.__generate_default()
 
     def __generate_yesterday(self):
-        return "Yesterday" if random.random() >= 0.5 else "The day before yesterday"
+        return "Ayer" if random.random() >= 0.5 else "Anteayer"
 
     def __generate_time(self):
         if random.random() >= 0.5:
-            return random.choice(self.TimeTemplates).format(random.choice(["a quarter of an hour", "quarter of an hour", "a quarter hour"]))
+            return random.choice(self.TimeTemplates).format(random.choice(["un cuarto de hora", "cuarto de hora"]))
         if random.random() >= 0.5:
-            return random.choice(self.TimeTemplates).format(random.choice(["three quarters of an hour", "three-quartes of an hour"]))
-        return random.choice(self.TimeTemplates).format(random.choice(["half an hour", "a half hour"]))
+            return random.choice(self.TimeTemplates).format(random.choice(["tres cuartos de hora"]))
+        return random.choice(self.TimeTemplates).format(random.choice(["media hora"]))
 
     def __generate_weekend(self):
         n = self.number()
         if n == 1:
-            return random.choice(self.PastWeekendTemplates).format("weekend")
+            return random.choice(self.PastWeekendTemplates).format("fin de semana")
         return random.choice(self.MultipleWeekendTemplates).format(n)
 
     def __generate_default(self):

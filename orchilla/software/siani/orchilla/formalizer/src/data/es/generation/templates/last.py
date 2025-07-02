@@ -1,16 +1,16 @@
 import random
 
-from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.es.generation.template import DateEntryTemplate
 
 
 class LastDateEntryTemplate(DateEntryTemplate):
-    ScaleTemplates = ["last {}", "the last {}", "past {}", "the past {}", "of last {}", "of the last {}", "of the past {}", "from the last {}", "from the past {}", "from last {}", "from past {}", "the previous {}", "from the previous", "previous {}"]
-    DecadeTemplates = ["the past {}s decade", "the last {}s decade", "prior {}s decade"]
-    SingleTemplates = ["last {}", "past {}", "this past {}", "the {} before", "previous {}", "{} prior"]
-    MultipleTemplates = ["{} {}s ago", "{} {}s back", "{} {}s prior", "{} {}s earlier", "{} {}s before"]
-    DayOfMonthTemplates = ["the past {} day", "the previous {} day", "the prior {} day"]
-    DayMonthTemplates = ["last {} {}", "last {} of {}", "past {} {}", "past {} of {}", "this past {} {}", "this past {} of {}", "the last {} {}", "the last {} of {}", "the past {} {}", "the past {} of {}", "on last {} {}", "on last {} of {}", "on the last {} {}", "on the last {} of {}", "on the past {} {}", "on the past {} of {}", "at last {} {}", "at last {} of {}", "at the last {} {}", "at the last {} of {}", "previous {} of {}", "previous {} {}", "the previous {} of {}", "the previous {} {}", "on the previous {} of {}", "on the previous {} {}", "the {} of {} that passed", "the {} {} that passed", "{} of {} that passed", "{} {} that passed"]
-    MonthDayTemplates = ["last {} {}", "past {} {}", "this past {} {}", "the last {} {}", "the past {} {}", "on last {} {}", "on the last {} {}", "on the past {} {}", "at last {} {}", "at the last {} {}", "previous {} {}", "the previous {} {}", "on the previous {} {}", "the {} {} that passed", "{} {} that passed"]
+    ScaleTemplates = ["último {}", "el último {}", "{} pasado", "el {} pasado", "del último {}", "del pasado {}", "de la última {}", "de los últimos {}", "de los pasados {}", "del pasado {}", "de la última {}", "el {} anterior", "del anterior", "{} anterior"]
+    DecadeTemplates = ["la década de los {}s pasados", "la década de los últimos {}s", "la década anterior de los {}s"]
+    SingleTemplates = ["el último {}", "el {} pasado", "este {} pasado", "el {} anterior", "{} anterior", "{} previo"]
+    MultipleTemplates = ["hace {} {}s", "{} {}s atrás", "{} {}s antes", "{} {}s previos", "{} {}s anteriores"]
+    DayOfMonthTemplates = ["el pasado día {}", "el día anterior {}", "el día previo {}"]
+    DayMonthTemplates = ["último {} {}", "último {} de {}", "{} {} pasado", "{} de {} pasado", "este último {} {}", "este último {} de {}", "el último {} {}", "el último {} de {}", "el {} {} pasado", "el {} de {} pasado", "el {} {} anterior", "el {} de {} anterior", "el pasado {} {}", "el pasado {} de {}", "en el último {} {}", "en el último {} de {}", "en el pasado {} {}", "en el pasado {} de {}", "en el {} {} pasado", "en el {} de {} pasado", "en el {} {} anterior", "en el {} de {} anterior", "el {} de {} que pasó", "el {} {} que pasó", "{} de {} que pasó", "{} {} que pasó"]
+    MonthDayTemplates = ["último {} {}", "{} {} pasado", "este {} {} pasado", "el último {} {}", "el {} {} pasado", "en el último {} {}", "en el último {} {}", "en el {} {} pasado", "en el {} {} anterior", "el {} {} anterior", "el anterior {} {}", "en el {} {} anterior", "el {} {} que pasó", "{} {} que pasó"]
 
     def __call__(self):
         probability = random.random()

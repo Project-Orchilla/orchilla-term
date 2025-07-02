@@ -1,20 +1,18 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.template import DateEntryTemplate
 
 
 class OrdinalDateEntryTemplate(DateEntryTemplate):
-    Ordinals = [
-        "first", "second", "third", "fourth"
-    ]
-    HourTemplates = ["{} hour", "the {} hour", "on the {} hour"]
-    DayTemplates = ["{} day", "the {} day", "on the {} day"]
-    WeekdayTemplates = ["{} {}", "the {} {}", "on the {} {}"]
-    WeekTemplates = ["{} week", "the {} week", "on the {} week"]
-    WeekendTemplates = ["{} weekend", "the {} weekend", "on the {} weekend"]
-    MonthTemplates = ["{} month", "the {} month", "on the {} month"]
-    SemesterTemplates = ["{} Semester", "the {} Semester", "on the {} Semester"]
-    QuarterTemplates = ["{} Quarter", "the {} Quarter", "on the {} Quarter"]
+    Ordinals = ["primer", "segundo", "tercer", "cuarto"]
+    HourTemplates = ["{} horas", "las {} horas", "a las {} horas"]
+    DayTemplates = ["{} día", "el {} día", "en el {} día"]
+    WeekdayTemplates = ["{} {}", "el {} {}", "en el {} {}"]
+    WeekTemplates = ["{} semana", "la {} semana", "en la {} semana"]
+    WeekendTemplates = ["{} fin de semana", "el {} fin de semana", "en el {} fin de semana"]
+    MonthTemplates = ["{} mes", "el {} mes", "en el {} mes"]
+    SemesterTemplates = ["{} semestre", "en {} semestre", "en el {} semestre"]
+    QuarterTemplates = ["{} cuarto", "el {} cuarto", "en el {} cuarto"]
 
     def __call__(self):
         probability = random.random()

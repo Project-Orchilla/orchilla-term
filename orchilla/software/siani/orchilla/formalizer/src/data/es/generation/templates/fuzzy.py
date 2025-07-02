@@ -1,19 +1,19 @@
 import random
 
-from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.es.generation.template import DateEntryTemplate
 
 
 class FuzzyEntryTemplate(DateEntryTemplate):
-    EarlyTemplates = ["start", "beginning", "the start", "the beginning"]
-    MidTemplates = ["in the middle", "halfway through", "mid"]
-    LateTemplates = ["end", "late"]
-    AroundTemplates = ["around", "approximately"]
-    MorningTemplates = ["in the morning", "morning", "this morning"]
-    AfternoonTemplates = ["afternoon", "in the afternoon", "this afternoon"]
-    EveningTemplates = ["evening", "in the evening", "this evening"]
-    NightTemplates = ["night", "in the night", "this night", "at night"]
-    BeforeTemplates = ["before"]
-    AfterTemplates = ["after"]
+    EarlyTemplates = ["inicios", "comienzos", "el inicio", "el comienzo"]
+    MidTemplates = ["mediados", "a mitad", "medio"]
+    LateTemplates = ["finales"]
+    AroundTemplates = ["alrededor", "aproximadamente"]
+    MorningTemplates = ["en la mañana", "por la mañana"]
+    AfternoonTemplates = ["por la tarde", "en la tarde"]
+    EveningTemplates = ["por la tarde"]
+    NightTemplates = ["por la noche", "en la noche"]
+    BeforeTemplates = ["antes"]
+    AfterTemplates = ["después"]
 
     def __call__(self):
         probability = random.random()

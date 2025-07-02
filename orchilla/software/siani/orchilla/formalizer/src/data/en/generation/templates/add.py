@@ -1,6 +1,6 @@
 import random
 
-from software.siani.orchilla.formalizer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.en.generation.template import DateEntryTemplate
 
 
 class AddDateEntryTemplate(DateEntryTemplate):

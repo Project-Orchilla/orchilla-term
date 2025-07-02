@@ -1,15 +1,15 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.decomposer.src.data.es.generation.template import DateEntryTemplate
 
 
 class AddDateEntryTemplate(DateEntryTemplate):
-    TodayTemplates = ["today", "from today", "now", "from now", "at present"]
-    ScaleTemplates = ["this {}", "of this {}", "from this {}", "the current {}", "of the current {}", "current {}"]
-    TimeTemplates = ["in {}", "after {}"]
-    NextWeekendTemplates = ["next {}", "the next {}", "following {}", "the following {}", "of next {}", "of the next {}", "of the following {}", "from next {}", "from the next {}", "from the following {}"]
-    MultipleWeekendTemplates = ["within {} weekends", "in {} weekends", "after {} weekends", "by {} weekends", "in the next {} weekends"]
-    DefaultTemplates = ["within {} {}s", "in {} {}s", "after {} {}s", "by {} {}s", "in the next {} {}s"]
+    TodayTemplates = ["hoy", "a partir de hoy", "ahora", "a partir de ahora", "en el presente"]
+    ScaleTemplates = ["este {}", "de este {}", "desde este {}", "el presente {}", "del presente {}", "presente {}"]
+    TimeTemplates = ["en {}", "después de {}"]
+    NextWeekendTemplates = ["próximo {}", "el próximo {}", "siguiente {}", "el siguiente {}", "del siguiente {}", "del próximo {}"]
+    MultipleWeekendTemplates = ["en {} fines de semana", "en {} fines de semana", "después de {} fines de semana", "tras {} fines de semana", "en los próximos {} fines de semana"]
+    DefaultTemplates = ["en {} {}s", "tras {} {}s", "después {} {}s", "en los próximos {} {}s"]
 
     def __call__(self):
         probability = random.random()
@@ -21,7 +21,7 @@ class AddDateEntryTemplate(DateEntryTemplate):
         return self.__generate_default()
 
     def __generate_tomorrow(self):
-        return "Tomorrow" if random.random() >= 0.5 else "The day after tomorrow"
+        return "Mañana" if random.random() >= 0.5 else "Pasado mañana"
 
     def __generate_scale(self):
         scale = random.choice(self.Scales)
@@ -29,17 +29,17 @@ class AddDateEntryTemplate(DateEntryTemplate):
 
     def __generate_time(self):
         if random.random() >= 0.5:
-            return random.choice(self.TimeTemplates).format(random.choice(["a quarter of an hour", "quarter of an hour", "a quarter hour"]))
+            return random.choice(self.TimeTemplates).format(random.choice(["un cuarto de hora", "cuarto de hora"]))
         if random.random() >= 0.5:
-            return random.choice(self.TimeTemplates).format(random.choice(["three quarters of an hour", "three-quartes of an hour"]))
-        return random.choice(self.TimeTemplates).format(random.choice(["half an hour", "a half hour"]))
+            return random.choice(self.TimeTemplates).format(random.choice(["tres cuartos de hora", "unos tres cuartos de hora"]))
+        return random.choice(self.TimeTemplates).format(random.choice(["media hora", "una media hora"]))
 
     def __generate_weekend(self):
         n = self.number()
         if random.random() <= 0.2:
-            return random.choice(self.ScaleTemplates).format("weekend")
+            return random.choice(self.ScaleTemplates).format("fin de semana")
         if n == 1:
-            return random.choice(self.NextWeekendTemplates).format("weekend")
+            return random.choice(self.NextWeekendTemplates).format("fin de semana")
         return random.choice(self.MultipleWeekendTemplates).format(n)
 
     def __generate_default(self):

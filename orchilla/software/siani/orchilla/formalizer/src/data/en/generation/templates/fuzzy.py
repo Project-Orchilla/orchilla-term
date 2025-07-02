@@ -1,6 +1,6 @@
 import random
 
-from software.siani.orchilla.decomposer.src.data.generation.template import DateEntryTemplate
+from software.siani.orchilla.formalizer.src.data.en.generation.template import DateEntryTemplate
 
 
 class FuzzyEntryTemplate(DateEntryTemplate):
@@ -8,10 +8,10 @@ class FuzzyEntryTemplate(DateEntryTemplate):
     MidTemplates = ["in the middle", "halfway through", "mid"]
     LateTemplates = ["end", "late"]
     AroundTemplates = ["around", "approximately"]
-    MorningTemplates = ["in the morning", "morning"]
-    AfternoonTemplates = ["afternoon", "in the afternoon"]
-    EveningTemplates = ["evening", "in the evening"]
-    NightTemplates = ["night", "in the night"]
+    MorningTemplates = ["in the morning", "morning", "this morning"]
+    AfternoonTemplates = ["afternoon", "in the afternoon", "this afternoon"]
+    EveningTemplates = ["evening", "in the evening", "this evening"]
+    NightTemplates = ["night", "in the night", "this night", "at night"]
     BeforeTemplates = ["before"]
     AfterTemplates = ["after"]
 
@@ -29,31 +29,31 @@ class FuzzyEntryTemplate(DateEntryTemplate):
         return self.__generate_around()
 
     def __generate_early(self):
-        return random.choice(self.EarlyTemplates)
+        return "early\t{}".format(random.choice(self.EarlyTemplates))
 
     def __generate_mid(self):
-        return random.choice(self.MidTemplates)
+        return "mid\t{}".format(random.choice(self.MidTemplates))
 
     def __generate_late(self):
-        return random.choice(self.LateTemplates)
+        return "late\t{}".format(random.choice(self.LateTemplates))
 
     def __generate_before(self):
-        return random.choice(self.BeforeTemplates)
+        return "before\t{}".format(random.choice(self.BeforeTemplates))
 
     def __generate_after(self):
-        return random.choice(self.AfterTemplates)
+        return "after\t{}".format(random.choice(self.AfterTemplates))
 
     def __generate_morning(self):
-        return random.choice(self.MorningTemplates)
+        return "morning\t{}".format(random.choice(self.MorningTemplates))
 
     def __generate_afternoon(self):
-        return random.choice(self.AfternoonTemplates)
+        return "afternoon\t{}".format(random.choice(self.AfternoonTemplates))
 
     def __generate_evening(self):
-        return random.choice(self.EveningTemplates)
+        return "evening\t{}".format(random.choice(self.EveningTemplates))
 
     def __generate_night(self):
-        return random.choice(self.NightTemplates)
+        return "night\t{}".format(random.choice(self.NightTemplates))
 
     def __generate_around(self):
-        return random.choice(self.AroundTemplates)
+        return "around\t{}".format(random.choice(self.AroundTemplates))

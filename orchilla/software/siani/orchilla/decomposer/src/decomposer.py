@@ -17,3 +17,7 @@ class Decomposer:
     def __load_model(self, path: str):
         with open(f"{path}/decomposer.mdl", 'rb') as f:
             return pickle.load(f)
+
+
+if __name__ == "__main__":
+    print(Decomposer("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/decomposer/model/es").decompose("el primer lunes de este mes"))

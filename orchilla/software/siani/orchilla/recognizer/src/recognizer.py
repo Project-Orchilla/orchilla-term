@@ -14,3 +14,7 @@ class Recognizer:
     def __load_model(self, path: str):
         with open(f"{path}/recognizer.mdl", 'rb') as f:
             return pickle.load(f)
+
+
+if __name__ == "__main__":
+    print(Recognizer("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/recognizer/model/es").recognize("Tuvimos nuestra última reunión hace unas 3 semanas."))
