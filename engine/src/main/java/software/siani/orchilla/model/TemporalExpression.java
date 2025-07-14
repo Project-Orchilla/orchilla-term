@@ -1,7 +1,7 @@
 package software.siani.orchilla.model;
 
-import software.siani.orchilla.model.operators.CompositeTemporalOperator;
-import software.siani.orchilla.model.operators.TemporalOperator;
+import software.siani.orchilla.model.functions.CompositeTemporalFunction;
+import software.siani.orchilla.model.functions.TemporalFunction;
 import systems.intino.datamarts.subjectstore.SubjectStore;
 
 import java.util.List;
@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public class TemporalExpression {
     private TemporalTag context;
-    private final CompositeTemporalOperator operator;
+    private final CompositeTemporalFunction operator;
 
-    public TemporalExpression(TemporalTag context, CompositeTemporalOperator operator) {
+    public TemporalExpression(TemporalTag context, CompositeTemporalFunction operator) {
         this.context = context;
         this.operator = operator;
     }
@@ -31,12 +31,12 @@ public class TemporalExpression {
         return context;
     }
 
-    public List<TemporalOperator> operators() {
-        return operator.temporalOperators();
+    public List<TemporalFunction> operators() {
+        return operator.temporalFunctions();
     }
 
-    public TemporalOperator operator(int index) {
-        return operator.temporalOperators().get(index);
+    public TemporalFunction operator(int index) {
+        return operator.temporalFunctions().get(index);
     }
 
     @Override

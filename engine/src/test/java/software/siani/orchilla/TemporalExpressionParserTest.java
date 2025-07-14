@@ -5,23 +5,29 @@ import software.siani.orchilla.model.Period;
 import software.siani.orchilla.model.TemporalExpression;
 import software.siani.orchilla.model.TemporalExpressionParser;
 import software.siani.orchilla.model.TemporalTag;
-import software.siani.orchilla.model.operators.day.*;
-import software.siani.orchilla.model.operators.decade.SetDecadeTemporalOperator;
-import software.siani.orchilla.model.operators.events.SetEventTemporalOperator;
-import software.siani.orchilla.model.operators.fuzzy.*;
-import software.siani.orchilla.model.operators.hour.SetHourTemporalOperator;
-import software.siani.orchilla.model.operators.hour.SubHourTemporalOperator;
-import software.siani.orchilla.model.operators.minute.SetMinuteTemporalOperator;
-import software.siani.orchilla.model.operators.month.AddMonthTemporalOperator;
-import software.siani.orchilla.model.operators.month.NextMonthTemporalOperator;
-import software.siani.orchilla.model.operators.month.SetMonthTemporalOperator;
-import software.siani.orchilla.model.operators.week.AddWeekTemporalOperator;
-import software.siani.orchilla.model.operators.week.SetWeekOperator;
-import software.siani.orchilla.model.operators.weekday.LastWeekdayOperator;
-import software.siani.orchilla.model.operators.weekday.NextWeekdayOperator;
-import software.siani.orchilla.model.operators.weekday.SetWeekdayOperator;
-import software.siani.orchilla.model.operators.weekend.SetWeekendOperator;
-import software.siani.orchilla.model.operators.year.SetYearTemporalOperator;
+import software.siani.orchilla.model.functions.day.AddDayTemporalFunction;
+import software.siani.orchilla.model.functions.day.NextDayTemporalFunction;
+import software.siani.orchilla.model.functions.day.SetDayTemporalFunction;
+import software.siani.orchilla.model.functions.day.SubDayTemporalFunction;
+import software.siani.orchilla.model.functions.decade.SetDecadeTemporalFunction;
+import software.siani.orchilla.model.functions.events.LastWithArgumentsEventTemporalFunction;
+import software.siani.orchilla.model.functions.events.NextWithArgumentsEventTemporalFunction;
+import software.siani.orchilla.model.functions.events.SetEventTemporalFunction;
+import software.siani.orchilla.model.functions.fuzzy.*;
+import software.siani.orchilla.model.functions.hour.SetHourTemporalFunction;
+import software.siani.orchilla.model.functions.hour.SubHourTemporalFunction;
+import software.siani.orchilla.model.functions.minute.SetMinuteTemporalFunction;
+import software.siani.orchilla.model.functions.month.AddMonthTemporalFunction;
+import software.siani.orchilla.model.functions.month.LastMonthTemporalFunction;
+import software.siani.orchilla.model.functions.month.NextMonthTemporalFunction;
+import software.siani.orchilla.model.functions.month.SetMonthTemporalFunction;
+import software.siani.orchilla.model.functions.week.AddWeekTemporalFunction;
+import software.siani.orchilla.model.functions.week.SetWeekFunction;
+import software.siani.orchilla.model.functions.weekday.LastWeekdayFunction;
+import software.siani.orchilla.model.functions.weekday.NextWeekdayFunction;
+import software.siani.orchilla.model.functions.weekday.SetWeekdayFunction;
+import software.siani.orchilla.model.functions.weekend.SetWeekendFunction;
+import software.siani.orchilla.model.functions.year.SetYearTemporalFunction;
 import software.siani.orchilla.model.units.Month;
 import software.siani.orchilla.model.units.Weekday;
 import systems.intino.datamarts.subjectstore.SubjectStore;
@@ -56,8 +62,8 @@ public class TemporalExpressionParserTest {
         String string = "2025>>set M04d02";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new SetMonthTemporalOperator(Month.Apr),
-                        new SetDayTemporalOperator(2)));
+                        new SetMonthTemporalFunction(Month.Apr),
+                        new SetDayTemporalFunction(2)));
     }
 
     @Test
@@ -65,9 +71,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>set Y2024M04d02";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new SetYearTemporalOperator(2024),
-                        new SetMonthTemporalOperator(Month.Apr),
-                        new SetDayTemporalOperator(2))
+                        new SetYearTemporalFunction(2024),
+                        new SetMonthTemporalFunction(Month.Apr),
+                        new SetDayTemporalFunction(2))
                 );
     }
 
@@ -76,9 +82,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>set Y2024>>set M04>>set d02";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new SetYearTemporalOperator(2024),
-                        new SetMonthTemporalOperator(Month.Apr),
-                        new SetDayTemporalOperator(2))
+                        new SetYearTemporalFunction(2024),
+                        new SetMonthTemporalFunction(Month.Apr),
+                        new SetDayTemporalFunction(2))
                 );
     }
 
@@ -87,7 +93,7 @@ public class TemporalExpressionParserTest {
         String string = "2025>>add 1d";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new AddDayTemporalOperator(1)
+                        new AddDayTemporalFunction(1)
                 ));
     }
 
@@ -96,8 +102,8 @@ public class TemporalExpressionParserTest {
         String string = "2025>>add 4d4w";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new AddWeekTemporalOperator(4),
-                        new AddDayTemporalOperator(4)
+                        new AddWeekTemporalFunction(4),
+                        new AddDayTemporalFunction(4)
                 ));
     }
 
@@ -107,9 +113,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>add 4d4w>>add 2M";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new AddWeekTemporalOperator(4),
-                        new AddDayTemporalOperator(4),
-                        new AddMonthTemporalOperator(2)
+                        new AddWeekTemporalFunction(4),
+                        new AddDayTemporalFunction(4),
+                        new AddMonthTemporalFunction(2)
                 ));
     }
 
@@ -118,9 +124,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>next d04M04>>add 2M";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new NextMonthTemporalOperator(Month.Apr),
-                        new NextDayTemporalOperator(4),
-                        new AddMonthTemporalOperator(2)
+                        new NextMonthTemporalFunction(Month.Apr),
+                        new NextDayTemporalFunction(4),
+                        new AddMonthTemporalFunction(2)
                 ));
     }
 
@@ -129,9 +135,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>next d04M04>>add 2M>>early";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new NextMonthTemporalOperator(Month.Apr),
-                        new NextDayTemporalOperator(4),
-                        new AddMonthTemporalOperator(2),
+                        new NextMonthTemporalFunction(Month.Apr),
+                        new NextDayTemporalFunction(4),
+                        new AddMonthTemporalFunction(2),
                         new Early()
                 ));
     }
@@ -141,9 +147,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>next d04M04>>add 2M>>mid";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new NextMonthTemporalOperator(Month.Apr),
-                        new NextDayTemporalOperator(4),
-                        new AddMonthTemporalOperator(2),
+                        new NextMonthTemporalFunction(Month.Apr),
+                        new NextDayTemporalFunction(4),
+                        new AddMonthTemporalFunction(2),
                         new Mid()
                 ));
     }
@@ -154,9 +160,9 @@ public class TemporalExpressionParserTest {
         String string = "2025>>next d04M04>>add 2M>>late";
         assertThat(new TemporalExpressionParser(subjectStore).parse(string).operators())
                 .isEqualTo(List.of(
-                        new NextMonthTemporalOperator(Month.Apr),
-                        new NextDayTemporalOperator(4),
-                        new AddMonthTemporalOperator(2),
+                        new NextMonthTemporalFunction(Month.Apr),
+                        new NextDayTemporalFunction(4),
+                        new AddMonthTemporalFunction(2),
                         new Late()
                 ));
     }
@@ -188,11 +194,11 @@ public class TemporalExpressionParserTest {
         String string = "???>>set M05>>first wd2>>sub 1d>>set h17m05";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetMonthTemporalOperator(Month.May),
-                        new SetWeekdayOperator(Weekday.Tuesday, 1),
-                        new SubDayTemporalOperator(1),
-                        new SetHourTemporalOperator(17),
-                        new SetMinuteTemporalOperator(5)));
+                        new SetMonthTemporalFunction(Month.May),
+                        new SetWeekdayFunction(Weekday.Tuesday, 1),
+                        new SubDayTemporalFunction(1),
+                        new SetHourTemporalFunction(17),
+                        new SetMinuteTemporalFunction(5)));
     }
 
     @Test
@@ -200,10 +206,10 @@ public class TemporalExpressionParserTest {
         String string = "???>>add 1M>>second wd2>>set h18m00";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new AddMonthTemporalOperator(1),
-                        new SetWeekdayOperator(Weekday.Tuesday, 2),
-                        new SetHourTemporalOperator(18),
-                        new SetMinuteTemporalOperator(0)));
+                        new AddMonthTemporalFunction(1),
+                        new SetWeekdayFunction(Weekday.Tuesday, 2),
+                        new SetHourTemporalFunction(18),
+                        new SetMinuteTemporalFunction(0)));
     }
 
     @Test
@@ -211,7 +217,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>last wd4";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new LastWeekdayOperator(1, Weekday.Thursday)));
+                        new LastWeekdayFunction(1, Weekday.Thursday)));
     }
 
     @Test
@@ -219,7 +225,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>set \"medieval times\"";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetEventTemporalOperator("medieval times", subjectStore)));
+                        new SetEventTemporalFunction("medieval times", subjectStore)));
     }
 
     @Test
@@ -228,8 +234,8 @@ public class TemporalExpressionParserTest {
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
                         new Morning(),
-                        new SetHourTemporalOperator(6),
-                        new SetMinuteTemporalOperator(45)));
+                        new SetHourTemporalFunction(6),
+                        new SetMinuteTemporalFunction(45)));
     }
 
     @Test
@@ -237,8 +243,8 @@ public class TemporalExpressionParserTest {
         String string = "???>>set \"Halloween\">>add 1d";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetEventTemporalOperator("Halloween", subjectStore),
-                        new AddDayTemporalOperator(1)));
+                        new SetEventTemporalFunction("Halloween", subjectStore),
+                        new AddDayTemporalFunction(1)));
     }
 
     @Test
@@ -246,7 +252,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>next wd05>>before";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new NextWeekdayOperator(1, Weekday.Friday),
+                        new NextWeekdayFunction(1, Weekday.Friday),
                         new Before()));
     }
 
@@ -255,7 +261,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>set D90>>before";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetDecadeTemporalOperator(90),
+                        new SetDecadeTemporalFunction(90),
                         new Before()));
     }
 
@@ -264,8 +270,8 @@ public class TemporalExpressionParserTest {
         String string = "???>>set M04>>set n-1wd04";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetMonthTemporalOperator(Month.Apr),
-                        new SetWeekdayOperator(Weekday.Thursday, -1)));
+                        new SetMonthTemporalFunction(Month.Apr),
+                        new SetWeekdayFunction(Weekday.Thursday, -1)));
     }
 
     @Test
@@ -273,10 +279,10 @@ public class TemporalExpressionParserTest {
         String string = "???>>set \"fiscal quarter\">>last n1wd01>>set h09m00>>before";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetEventTemporalOperator("fiscal quarter", subjectStore),
-                        new LastWeekdayOperator(1, Weekday.Monday),
-                        new SetHourTemporalOperator(9),
-                        new SetMinuteTemporalOperator(0),
+                        new SetEventTemporalFunction("fiscal quarter", subjectStore),
+                        new LastWeekdayFunction(1, Weekday.Monday),
+                        new SetHourTemporalFunction(9),
+                        new SetMinuteTemporalFunction(0),
                         new Before()));
     }
 
@@ -285,9 +291,9 @@ public class TemporalExpressionParserTest {
         String string = "???>>set Y2024M07d17";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetYearTemporalOperator(2024),
-                        new SetMonthTemporalOperator(Month.Jul),
-                        new SetDayTemporalOperator(17)));
+                        new SetYearTemporalFunction(2024),
+                        new SetMonthTemporalFunction(Month.Jul),
+                        new SetDayTemporalFunction(17)));
     }
 
     @Test
@@ -295,7 +301,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>first w";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetWeekOperator(1)));
+                        new SetWeekFunction(1)));
     }
 
     @Test
@@ -303,7 +309,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>second we";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SetWeekendOperator(2)));
+                        new SetWeekendFunction(2)));
     }
 
     @Test
@@ -311,7 +317,7 @@ public class TemporalExpressionParserTest {
         String string = "???>>next n59wd02";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new NextWeekdayOperator(59, Weekday.Tuesday)));
+                        new NextWeekdayFunction(59, Weekday.Tuesday)));
     }
 
     @Test
@@ -319,8 +325,8 @@ public class TemporalExpressionParserTest {
         String string = "???>>add 2.5M";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new AddMonthTemporalOperator(2),
-                        new AddWeekTemporalOperator(2)));
+                        new AddMonthTemporalFunction(2),
+                        new AddWeekTemporalFunction(2)));
     }
 
     @Test
@@ -328,7 +334,61 @@ public class TemporalExpressionParserTest {
         String string = "???>>sub 1.5d";
         assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
                 .isEqualTo(List.of(
-                        new SubDayTemporalOperator(1),
-                        new SubHourTemporalOperator(12)));
+                        new SubDayTemporalFunction(1),
+                        new SubHourTemporalFunction(12)));
     }
+
+    @Test
+    public void render_expression_17() {
+        String string = "???>>next Monday";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new NextWeekdayFunction(1, Weekday.Monday)));
+    }
+
+    @Test
+    public void render_expression_18() {
+        String string = "???>>last june";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new LastMonthTemporalFunction(Month.Jun)));
+    }
+
+    @Test
+    public void render_expression_19() {
+        String string = "  ???  >>   last    june  ";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new LastMonthTemporalFunction(Month.Jun)));
+    }
+
+    @Test
+    public void render_expression_20() {
+        String string = "  ???  >>  set E Semana Santa >> add 1d";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new SetEventTemporalFunction("Semana Santa", subjectStore),
+                        new AddDayTemporalFunction(1)));
+    }
+
+    @Test
+    public void render_expression_21() {
+        String string = "  ???  >>  next E Semana Santa >> add 1d";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new NextWithArgumentsEventTemporalFunction(1, "Semana Santa", subjectStore),
+                        new AddDayTemporalFunction(1)
+                ));
+    }
+
+    @Test
+    public void render_expression_22() {
+        String string = "  ???  >>  last E Semana Santa >> add 1d";
+        assertThat(new TemporalExpression.Builder().with(subjectStore).build(string).operators())
+                .isEqualTo(List.of(
+                        new LastWithArgumentsEventTemporalFunction(1, "Semana Santa", subjectStore),
+                        new AddDayTemporalFunction(1)
+                ));
+    }
+
 }
