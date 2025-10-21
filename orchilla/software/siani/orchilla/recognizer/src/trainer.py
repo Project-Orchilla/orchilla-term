@@ -58,4 +58,4 @@ class DetectorDatasetReader:
 
 
 if __name__ == "__main__":
-    RecognizerTrainer().train(DetectorDatasetReader.read("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/recognizer/src/data/es/train.tsv"), "C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/recognizer/model", "es")
+    RecognizerTrainer().train(DetectorDatasetReader.read("data/es/train.tsv"), "model", "es")

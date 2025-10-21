@@ -58,4 +58,4 @@ class DecomposerDatasetReader:
 
 
 if __name__ == "__main__":
-    DecomposerTrainer().train(DecomposerDatasetReader.read("C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/decomposer/src/data/es/dataset.tsv"), "C:/Users/juanc/IdeaProjects/orchilla-term/orchilla/software/siani/orchilla/decomposer/model", "es")
+    DecomposerTrainer().train(DecomposerDatasetReader.read("data/es/dataset.tsv"), "model", "es")
