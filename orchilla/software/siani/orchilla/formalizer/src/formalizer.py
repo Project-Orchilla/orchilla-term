@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
-from software.siani.orchilla.formalizer.src.sorter import OperatorSorter
+from sorter import OperatorSorter
 
 
 class Formalizer:

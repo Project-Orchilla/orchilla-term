@@ -6,7 +6,7 @@ from nervaluate import Evaluator
 
 from software.siani.orchilla.recognizer.src.recognizer import Recognizer
 
-recognizer = Recognizer("../model")
+recognizer = Recognizer("../src/model/en")
 
 y_true = []
 y_preds = []
@@ -51,6 +51,6 @@ with open("test.tsv", "r", encoding="utf-8") as f:
             print("-"*50)
 
 
-evaluator = Evaluator(y_true, y_preds, tags=['TEMP_EXP'], loader="default")
+evaluator = Evaluator(y_true, y_preds, tags=['TEMP_EXP'], loader="dict")
 results, results_by_tag, result_indices, result_indices_by_tag = evaluator.evaluate()
 pprint.pprint(results)

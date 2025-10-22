@@ -58,4 +58,4 @@ class DecomposerDatasetReader:
 
 
 if __name__ == "__main__":
-    DecomposerTrainer().train(DecomposerDatasetReader.read("data/es/dataset.tsv"), "model", "es")
+    DecomposerTrainer().train(DecomposerDatasetReader.read("data/en/dataset.tsv"), "model", "en")

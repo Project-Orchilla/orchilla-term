@@ -103,4 +103,4 @@ class Logger(TrainerCallback):
 		self.logging_file.flush()
 
 
-FormalizerTrainer("es", 32).train("data/es/dataset.tsv", "model")
+FormalizerTrainer("en", 32).train("data/en/dataset.tsv", "model")
