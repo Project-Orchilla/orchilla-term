@@ -19,7 +19,7 @@ public record AddHalfHourTemporalFunction(int value) implements TemporalFunction
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().plusMinutes(minutesIn(value));
-        LocalDateTime end = temporaltag.tail().plusMinutes(minutesIn(value)).plusMinutes(MinutesPerHalf).minusNanos(1);
+        LocalDateTime end = start.plusMinutes(MinutesPerHalf).minusNanos(1);
         return new TemporalTag(start, end, Period.Minute, temporaltag.distribution().between(start, end));
     }
 }

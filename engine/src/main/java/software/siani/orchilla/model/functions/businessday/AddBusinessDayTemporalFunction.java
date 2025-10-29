@@ -17,8 +17,8 @@ public record AddBusinessDayTemporalFunction(int value) implements TemporalFunct
     public TemporalTag computeFor(TemporalTag temporaltag) {
         LocalDate current = temporaltag.head().toLocalDate();
         int daysToAdd = value;
-        int absDays   = Math.abs(daysToAdd);
-        int added     = 0;
+        int absDays = Math.abs(daysToAdd);
+        int added = 0;
         int direction = daysToAdd >= 0 ? 1 : -1;
         while (added < absDays) {
             current = current.plusDays(direction);
@@ -26,7 +26,7 @@ public record AddBusinessDayTemporalFunction(int value) implements TemporalFunct
             if (dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY || isHoliday(current)) added++;
         }
         LocalDateTime start = current.atStartOfDay();
-        LocalDateTime end   = current.atTime(LocalTime.MAX);
+        LocalDateTime end = current.atTime(LocalTime.MAX);
         return new TemporalTag(
                 start,
                 end,

@@ -16,7 +16,7 @@ public record SubHourTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().minusHours(value);
-        LocalDateTime end = temporaltag.tail().minusHours(value).plusHours(1).minusNanos(1);
+        LocalDateTime end = start.plusHours(1).minusNanos(1);
         return new TemporalTag(start, end, Period.Hour, temporaltag.distribution().between(start, end));
     }
 }

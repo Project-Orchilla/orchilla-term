@@ -16,7 +16,7 @@ public record SubYearTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().minusYears(value);
-        LocalDateTime end = temporaltag.tail().minusYears(value).plusYears(1).minusNanos(1);
+        LocalDateTime end = start.plusYears(1).minusNanos(1);
         return new TemporalTag(start, end, Period.Year, temporaltag.distribution().between(start, end));
     }
 }

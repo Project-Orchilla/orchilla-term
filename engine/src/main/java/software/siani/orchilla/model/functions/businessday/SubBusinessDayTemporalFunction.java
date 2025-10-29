@@ -18,7 +18,7 @@ public record SubBusinessDayTemporalFunction(int value) implements TemporalFunct
     public TemporalTag computeFor(TemporalTag temporaltag) {
         LocalDate current = temporaltag.head().toLocalDate();
         int daysToSubtract = Math.abs(value);
-        int subtracted    = 0;
+        int subtracted = 0;
         while (subtracted < daysToSubtract) {
             current = current.minusDays(1);
             DayOfWeek dow = current.getDayOfWeek();

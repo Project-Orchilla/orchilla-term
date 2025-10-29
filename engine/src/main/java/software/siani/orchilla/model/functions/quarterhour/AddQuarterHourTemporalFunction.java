@@ -18,7 +18,7 @@ public record AddQuarterHourTemporalFunction(int value) implements TemporalFunct
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().plusMinutes(minutesIn(value));
-        LocalDateTime end = temporaltag.tail().plusMinutes(minutesIn(value)).plusMinutes(1).minusNanos(1);
+        LocalDateTime end = start.plusMinutes(1).minusNanos(1);
         return new TemporalTag(start, end, Period.Minute, temporaltag.distribution().between(start, end));
     }
 }

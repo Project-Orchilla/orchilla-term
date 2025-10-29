@@ -17,7 +17,7 @@ public record SubSecondTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().minusSeconds(value);
-        LocalDateTime end = temporaltag.tail().minusSeconds(value).plusSeconds(1).minusNanos(1);
+        LocalDateTime end = start.plusSeconds(1).minusNanos(1);
         Distribution distribution = temporaltag.distribution().between(start, end);
         return new TemporalTag(start, end, Period.Second, distribution);
     }

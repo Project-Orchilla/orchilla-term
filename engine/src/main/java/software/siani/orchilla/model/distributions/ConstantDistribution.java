@@ -5,7 +5,16 @@ import software.siani.orchilla.model.Duration;
 
 import java.time.LocalDateTime;
 
-public record ConstantDistribution(long lowerBound, long upperBound) implements Distribution {
+public final class ConstantDistribution implements Distribution {
+    private final String name;
+    private final long lowerBound;
+    private final long upperBound;
+
+    public ConstantDistribution(long lowerBound, long upperBound) {
+        this.name = "constant";
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
+    }
 
     @Override
     public Distribution between(LocalDateTime start, LocalDateTime end) {
@@ -34,4 +43,17 @@ public record ConstantDistribution(long lowerBound, long upperBound) implements 
                 ", upperBound=" + upperBound +
                 '}';
     }
+
+    public String name() {
+        return name;
+    }
+
+    public long lowerBound() {
+        return lowerBound;
+    }
+
+    public long upperBound() {
+        return upperBound;
+    }
+
 }

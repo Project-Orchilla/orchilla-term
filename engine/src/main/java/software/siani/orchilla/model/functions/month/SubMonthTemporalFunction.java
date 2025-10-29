@@ -16,7 +16,7 @@ public record SubMonthTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().minusMonths(value);
-        LocalDateTime end = temporaltag.tail().minusMonths(value).plusMonths(1).minusNanos(1);
+        LocalDateTime end = start.plusMonths(1).minusNanos(1);
         return new TemporalTag(start, end, Period.Month, temporaltag.distribution().between(start, end));
     }
 }

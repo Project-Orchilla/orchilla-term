@@ -20,7 +20,7 @@ public record AddDecadeTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().plusYears(yearsIn(value));
-        LocalDateTime end = temporaltag.tail().plusYears(yearsIn(value)).plusYears(YearsPerDecade).minusNanos(1);
+        LocalDateTime end = start.plusYears(YearsPerDecade).minusNanos(1);
         return new TemporalTag(start, end, Period.Decade, temporaltag.distribution().between(start, end));
     }
 }

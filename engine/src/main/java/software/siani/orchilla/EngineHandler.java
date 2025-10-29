@@ -1,13 +1,8 @@
 package software.siani.orchilla;
 
 import com.google.gson.Gson;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import io.javalin.http.Context;
+import io.javalin.http.HttpStatus;
 import software.siani.orchilla.model.Distribution;
 import software.siani.orchilla.model.Period;
 import software.siani.orchilla.model.TemporalExpression;
@@ -16,9 +11,9 @@ import systems.intino.datamarts.subjectstore.SubjectStore;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
-@RestController
-public class EngineRestAPI {
+public class EngineHandler {
     private static final SubjectStore subjectStore;
 
     static {
@@ -29,26 +24,26 @@ public class EngineRestAPI {
         }
     }
 
-    @PostMapping(
-            path = "/process",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public ResponseEntity<String> processEngine(@RequestBody software.siani.orchilla.InputDTO payload) {
+    public static void processEngine(Context ctx) {
+        Gson gson = new Gson();
+        InputDTO payload = gson.fromJson(ctx.body(), InputDTO.class);
+
         TemporalExpression temporalExpression = new TemporalExpression.Builder()
                 .with(subjectStore)
                 .build(payload.context() + ">>" + payload.operations());
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+
         if (temporalExpression.context() == null) {
-            String innerJson = String.format(
-                    "{\"context\":\"???\",\"operations\":%s}",
-                    temporalExpression.operators().stream().map(o -> "\"" + o.toString() + "\"").toList()
-            );
-            return new ResponseEntity<>(innerJson, headers, HttpStatus.OK);
+            String innerJson = gson.toJson(Map.of(
+                    "context", "???",
+                    "operations", temporalExpression.operators().stream().map(Object::toString).toList()
+            ));
+            ctx.status(HttpStatus.OK).json(innerJson);
+            return;
         }
+
         TemporalTag result = temporalExpression.solve();
-        return new ResponseEntity<>(new Gson().toJson(new TemporalTagPojo(result)), headers, HttpStatus.OK);
+        TemporalTagPojo pojo = new TemporalTagPojo(result);
+        ctx.status(HttpStatus.OK).json(pojo);
     }
 
     public static class TemporalTagPojo {
@@ -66,5 +61,4 @@ public class EngineRestAPI {
             this.period = tag.period();
         }
     }
-
 }

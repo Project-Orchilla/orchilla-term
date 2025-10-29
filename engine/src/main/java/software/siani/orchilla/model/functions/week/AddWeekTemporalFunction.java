@@ -19,7 +19,7 @@ public record AddWeekTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().plusDays(daysIn(value));
-        LocalDateTime end = temporaltag.tail().plusDays(daysIn(value)).plusWeeks(1).minusNanos(1);
+        LocalDateTime end = start.plusWeeks(1).minusNanos(1);
         Distribution distribution = temporaltag.distribution().between(start, end);
         return new TemporalTag(start, end, Period.Week, distribution);
     }

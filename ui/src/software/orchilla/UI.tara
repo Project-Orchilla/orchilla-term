@@ -1,0 +1,46 @@
+dsl Konos
+
+use Theme
+
+Service UiElements as UI(port = "{port}", title = "{title}", favicon = "/images/orchilla-icon.png")
+	Resource(path = "/") home as Page(homeTemplate) Main
+	Resource(path = "/docs") doc as Page(docTemplate) Main
+
+Template homeTemplate as Relative(height=100%, width=100%)
+	TemplateStamp(template=headerTemplate) header
+
+	Block(layout=Vertical Flexible)
+		Block(layout=Vertical, format=centered) as Relative(width=100%)
+			Block(layout=Vertical Center) as Relative(width=100%, height=10%) > Text(format=h2 bold airTop whiteColor airBottom, translate=true) titleField
+			Block(layout=Vertical Flexible) landingPage as Conditional > TemplateStamp(template=landingTemplate) landingStamp
+			DisplayStamp(display=timelineDisplay) timelineStamp
+
+Template(layout=Horizontal Center, format=headerStyle) headerTemplate
+
+	Block(layout=Horizontal Center Flexible, format=middleAirTop middleAirBottom middleAirLeft) languageView
+		Image(value="/images/orchilla.png", format=airLeft, mobileReduceFactor=75%) as Absolute(width=50px, height=50px)
+		Link(title="Docs", format=airLeft) as Action() Addressable(UiElements.doc)
+
+
+Template(layout=Vertical Flexible Center) landingTemplate as Relative(height=100%, width=100%)
+	Block as Absolute(width=500px, height=500px)
+		Block(layout=Vertical Flexible CenterCenter)
+			Date(pattern="YYYY/MM/DD HH:mm:ss", format=middleWidth) contextDate as Editable(timePicker=true) Labeled("Context")
+			Block(layout=Vertical Flexible CenterCenter) memoBlock as Relative(height=100%, width=80%)
+				Text(format=h6 airTop whiteColor airBottom, translate=true) memoField as Memo(height=8Rows) Editable()
+			File(format=airBottom) dropFile as Absolute(width=200px, height=190px) Editable(showDropZone=true)
+			Button(title="Evaluate") evaluate as Action
+			Block(layout=Vertical Flexible CenterCenter) as Relative(height=100%, width=100%) > Text(format=h6 bold airTop whiteColor airBottom, translate=true) textField
+
+Display timelineDisplay
+	Notification refresh as Object(TimelineDTO) List
+	Request updateTimeline as Object(TimelineDTO) List
+
+Schema TimelineDTO
+	Attribute x as Text
+	Attribute name as Text
+	Attribute label as Text
+	Attribute description as Text
+
+Template docTemplate
+

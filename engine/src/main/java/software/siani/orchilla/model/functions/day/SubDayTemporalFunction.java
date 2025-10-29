@@ -16,7 +16,7 @@ public record SubDayTemporalFunction(int value) implements TemporalFunction {
             return new TemporalTag(start, end, temporaltag.period(), temporaltag.distribution().between(start, end));
         }
         LocalDateTime start = temporaltag.head().minusDays(value);
-        LocalDateTime end = temporaltag.tail().minusDays(value).plusDays(1).minusNanos(1);
+        LocalDateTime end = start.plusDays(1).minusNanos(1);
         return new TemporalTag(start, end, Period.Day, temporaltag.distribution().between(start, end));
     }
 }
