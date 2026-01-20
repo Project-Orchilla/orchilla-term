@@ -92,4 +92,25 @@ public class API {
 
         return JsonParser.parseString(response.body()).getAsJsonObject().get("prediction").getAsString();
     }
+
+    public static EngineOutputDTO process(String context, String operations) throws IOException, InterruptedException {
+        String url = "http://localhost:8080/process";
+
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("context", context);
+        payload.put("operations", operations);
+
+        String json = gson.toJson(payload);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(json))
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("process response:\n" + response.body());
+        return gson.fromJson(response.body(), EngineOutputDTO.class);
+    }
+
 }

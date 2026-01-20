@@ -15,7 +15,7 @@ class DecomposerTrainer:
 
     def train(self, dataset: list, path: str, language: str = "en"):
         self.__prepare_dataset(language=language, data=dataset)
-        train(f"../res/decomposer.cfg", "./output", overrides={"paths.train": "./train.spacy", "paths.dev": "./train.spacy"})
+        train(f"../res/decomposer.cfg", f"output-{language}", overrides={"paths.train": "./train.spacy", "paths.dev": "./train.spacy"})
         self.__save_model(path, language)
 
     def __prepare_dataset(self, language: str, data: list):
@@ -34,8 +34,8 @@ class DecomposerTrainer:
     def __save_model(self, path: str, language: str):
         Path(f"{path}/{language}").mkdir(parents=True, exist_ok=True)
         with open(f"{path}/{language}/decomposer.mdl", mode='wb') as f:
-            pickle.dump(spacy.load("./output/model-best"), f)
-        shutil.rmtree("./output")
+            pickle.dump(spacy.load("output-en/model-best"), f)
+        shutil.rmtree("output-en")
         os.remove("./train.spacy")
 
     def __load(self, language: str):
@@ -58,4 +58,5 @@ class DecomposerDatasetReader:
 
 
 if __name__ == "__main__":
-    DecomposerTrainer().train(DecomposerDatasetReader.read("data/en/dataset.tsv"), "model", "en")
+    language = "en"
+    DecomposerTrainer().train(DecomposerDatasetReader.read(f"data/{language}/dataset.tsv"), f"model-{language}", language)

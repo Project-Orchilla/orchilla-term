@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Orchilla API Docs</title>
+    <style>
+        :root {
+            --bg: #303030;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --subtext: #9da5b4;
+            --accent: #ffffff;
+            --green: #3fb950;
+            --border: #30363d;
+        }
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #004aad;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            border: 1px solid var(--border);
+        }
+        h1, h2, h4 {
+            color: var(--text);
+        }
+        h2 {
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        .endpoint {
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+        }
+        .method {
+            font-weight: bold;
+            color: white;
+            border-radius: 5px;
+            padding: 0.2rem 0.6rem;
+            margin-right: 0.5rem;
+        }
+        .method.POST { background: var(--green); }
+        pre {
+            background: #1c2128;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+        }
+        code {
+            font-family: "Courier New", monospace;
+            color: var(--accent);
+        }
+        p, em {
+            color: var(--subtext);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            color: var(--subtext);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Orchilla API Documentation</h1>
+    <p>Version 1.0 — Temporal and Semantic Processing</p>
+</header>
+
+<main>
+    <h2>1. Endpoints</h2>
+
+    <!-- Recognizer -->
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>https://orchilla/recognize</code>
+        <p><strong>Temporal Recognizer</strong> — detects temporal expressions within free text and returns their positions and type.</p>
+        <h4>Request Body (JSON):</h4>
+        <pre><code>{
+  "text": "We visited the family at Christmas in the year 2021."
+}</code></pre>
+        <h4>Example Response:</h4>
+        <pre><code>{
+  "entities": [
+    [23, 46, "TEMP_EXP"]
+  ]
+}</code></pre>
+        <p><em>Note:</em> The indices indicate the start and end positions of the detected expression in the text.</p>
+    </div>
+
+    <!-- Decomposer -->
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>https://orchilla/decompose</code>
+        <p><strong>Semantic Decomposer</strong> — splits complex temporal expressions into atomic semantic units.</p>
+        <h4>Request Body (JSON):</h4>
+        <pre><code>{
+  "text": "the decade of the last 10s the decade of the next 50s in about three quarters of an hour"
+}</code></pre>
+        <h4>Example Response:</h4>
+        <pre><code>{
+  "entities": [
+    [0, 28, "UNIT"],
+    [29, 58, "UNIT"],
+    [59, 87, "UNIT"]
+  ]
+}</code></pre>
+    </div>
+
+    <!-- Formalizer -->
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>https://orchilla/formalize</code>
+        <p><strong>Formalizer</strong> — transforms atomic semantic units into formal DSL operations.</p>
+        <h4>Request Body (JSON):</h4>
+        <pre><code>{
+  "units": ["before", "half past 5"]
+}</code></pre>
+        <h4>Example Response:</h4>
+        <pre><code>{
+  "prediction": [
+    { "operator": "before", "text": "before" },
+    { "operator": "set", "text": "h05m30" }
+  ]
+}</code></pre>
+    </div>
+
+    <!-- Relation Classifier -->
+    <div class="endpoint">
+        <span class="method POST">POST</span> <code>https://orchilla/relate</code>
+        <p><strong>Relation Classifier</strong> — determines which formal operations are related within a given context.</p>
+        <h4>Request Body (JSON):</h4>
+        <pre><code>{
+  "context": "temporal reasoning task",
+  "operations": [
+    { "operator": "before", "text": "h05m30" },
+    { "operator": "after", "text": "h04m15" }
+  ]
+}</code></pre>
+        <h4>Example Response:</h4>
+        <pre><code>{
+  "relations": [
+    { "source": 0, "target": 1, "type": "TEMP_ORDER" }
+  ]
+}</code></pre>
+    </div>
+</main>
+
+<footer>
+    Orchilla API Docs © 2025
+</footer>
+</body>
+</html>
