@@ -1,8 +1,8 @@
 package software.siani.orchilla.quassar;
 
 import io.quassar.ulpgc.orchilla.Event;
-import io.quassar.ulpgc.orchilla.ModelParser;
 import io.quassar.ulpgc.orchilla.OrchillaGraph;
+import io.quassar.ulpgc.orchilla.OrchillaModel;
 import io.quassar.ulpgc.orchilla.TemporalExpression;
 
 import java.io.IOException;
@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuassarParser {
-    public HashMap<String, String> parse(URL url) throws IOException {
-        ModelParser.Model model = ModelParser.loadFromURL(url);
+    public HashMap<String, String> parse(String url) throws IOException {
+        OrchillaModel.Model model = OrchillaModel.download(url);
         OrchillaGraph graph = model.graph();
         HashMap<String, String> result = new HashMap<>();
         processEvents(graph.eventList(), result);
