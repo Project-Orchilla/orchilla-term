@@ -11,7 +11,7 @@ public class MainRestAPI {
         Javalin app = Javalin.create(config -> {
             config.jsonMapper(jsonMapper());
             config.showJavalinBanner = false;
-        }).start(8080);
+        }).start(Integer.parseInt(System.getenv("port")));
         app.post("/process", EngineHandler::processEngine);
     }
 
