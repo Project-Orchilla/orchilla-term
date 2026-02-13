@@ -2,7 +2,7 @@ dsl Legio
 
 Artifact(groupId = "software.orchilla", version = "1.0.0") ui-elements
 	WebImports
-		WebArtifact("io.intino.alexandria", "ui-framework-elements", "LATEST") alexandria-ui-elements
+		WebArtifact("io.intino.alexandria", "ui-framework-elements", "6.7.42") alexandria-ui-elements
 		WebComponent("highcharts", "8.1.2")
         WebComponent("highcharts-react-official", "3.0.0")
 
