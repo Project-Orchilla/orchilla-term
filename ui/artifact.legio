@@ -10,7 +10,7 @@ Artifact(groupId = "software.orchilla", version = "1.0.0") ui
 		Compile(groupId = "io.intino.alexandria", artifactId = "ui-framework", version = "6.7.22")
 		Web(groupId = "software.orchilla", artifactId = "orchilla-ui", version = "1.0.0")
 		Web(groupId = "software.orchilla", artifactId = "ui-elements", version = "1.0.0")
-	Package(mode = ModulesAndLibrariesLinkedByManifest) as Runnable(mainClass = "software.orchilla.ui.box.Main")
+	Package(mode = ModulesAndLibrariesLinkedByManifest, finalName="ui") as Runnable(mainClass = "software.orchilla.ui.box.Main")
 	Parameter(name = "port")
 	Parameter(name="title")
 
