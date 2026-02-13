@@ -1,0 +1,10 @@
+dsl Legio
+
+Artifact(groupId = "software.orchilla", version = "1.0.0") ui-elements
+	WebImports
+		WebArtifact("io.intino.alexandria", "ui-framework-elements", "LATEST") alexandria-ui-elements
+		WebComponent("highcharts", "8.1.2")
+        WebComponent("highcharts-react-official", "3.0.0")
+
+Repository("intino-maven")
+	Release("https://artifactory.intino.io/artifactory/releases")

@@ -5,7 +5,6 @@ Artifact(groupId = "software.orchilla", version = "1.0.0") ui
 
 	Imports
 		Test(groupId = "junit", artifactId = "junit", version = "4.13")
-		Web(groupId = "software.orchilla", artifactId = "orchilla-u-i", version = "1.0.0")
 		Compile(groupId = "io.intino.alexandria", artifactId = "core-framework", version = "2.2.2")
 		Compile(groupId = "io.intino.alexandria", artifactId = "logger4j", version = "1.1.0")
 		Compile(groupId = "io.intino.alexandria", artifactId = "ui-framework", version = "6.7.22")

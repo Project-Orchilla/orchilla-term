@@ -1,0 +1,10 @@
+.MuiInput-formControl textarea {
+    margin-left: 5px !important;
+    border: 2px solid #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.orchilla-memo .MuiInput-formControl::after, .orchilla-memo .MuiInput-formControl::before {
+    display: none;
+}
