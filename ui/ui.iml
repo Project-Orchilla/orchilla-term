@@ -81,5 +81,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Intino: com.fasterxml.jackson.core:jackson-core:2.14.2" level="project" />
     <orderEntry type="library" name="Intino: org.locationtech.jts:jts-core:1.19.0" level="project" />
     <orderEntry type="module" module-name="ui-elements" />
+    <orderEntry type="library" name="Intino: es.monentia.gal2:gal2-models-accessor:1.0.0-SNAPSHOT" level="project" />
   </component>
 </module>

@@ -2,29 +2,29 @@ version: "3.9"
 
 services:
     recognizer:
-        image: recognizer:latest
-        container_name: recognizer
+        image: monentiadev/orchilla-recognizer:1.0.0
+        container_name: orchilla-recognizer
         ports:
             - "8001:8000"
         restart: unless-stopped
 
     decomposer:
-        image: decomposer:latest
-        container_name: decomposer
+        image: monentiadev/orchilla-decomposer:1.0.0
+        container_name: orchilla-decomposer
         ports:
             - "8002:8000"
         restart: unless-stopped
 
     relation-classifier:
-        image: relation-classifier:latest
-        container_name: relation-classifier
+        image: monentiadev/orchilla-relation-classifier:1.0.0
+        container_name: orchilla-relation-classifier
         ports:
             - "8003:8000"
         restart: unless-stopped
 
     formalizer:
-        image: formalizer:latest
-        container_name: formalizer
+        image: monentiadev/orchilla-formalizer:1.0.0
+        container_name: orchilla-formalizer
         ports:
             - "8004:8000"
         restart: unless-stopped
